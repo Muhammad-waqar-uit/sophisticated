@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
-import Script from 'next/script' 
+import Script from 'next/script'
 import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Xten',
-  description: 'Made With Love',
-  generator: 'xtentechnologies.com',
+  icons: {
+    icon: '/logo.svg',
+  },
 }
 
 export default function RootLayout({

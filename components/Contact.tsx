@@ -37,16 +37,25 @@ export default function Contact() {
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitted(true)
-      setTimeout(() => {
-        setIsSubmitted(false)
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formState),
+      })
+
+      if (res.ok) {
+        setIsSubmitted(true)
         setFormState({ name: "", email: "", company: "", service: "", message: "" })
-      }, 3000)
-    }, 1000)
+        setTimeout(() => setIsSubmitted(false), 3000)
+      } else {
+        console.error("Failed to send email")
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
