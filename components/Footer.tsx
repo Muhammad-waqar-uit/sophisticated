@@ -122,7 +122,7 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Newsletter Signup */}
+        Newsletter Signup
         <motion.div
           className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-8 mb-12 backdrop-blur-sm border border-white/10"
           initial={{ opacity: 0, y: 20 }}

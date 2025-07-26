@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
+import Script from 'next/script' // ✅ import Script
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Xten',
+  description: 'Made With Love',
+  generator: 'xtentechnologies.com',
 }
 
 export default function RootLayout({
@@ -14,7 +15,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+
+        {/* ✅ Tawk.to script */}
+        <Script
+          strategy="afterInteractive"
+          src="https://embed.tawk.to/6884bf12828524191a31a5f0/1j138koc8"
+        />
+      </body>
     </html>
   )
 }
