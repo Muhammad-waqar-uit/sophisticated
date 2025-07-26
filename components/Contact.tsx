@@ -226,7 +226,7 @@ export default function Contact() {
                           Data Analytics
                         </option>
                         <option value="cybersecurity" className="bg-gray-800">
-                          Cybersecurity
+                          Blockchain Development
                         </option>
                         <option value="ai-automation" className="bg-gray-800">
                           AI & Automation
