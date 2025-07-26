@@ -231,6 +231,9 @@ export default function Contact() {
                         <option value="ai-automation" className="bg-gray-800">
                           AI & Automation
                         </option>
+                        <option value="custom-solutions" className="bg-gray-800">
+                          Custom Solutions
+                        </option>
                       </select>
                     </div>
                   </div>
