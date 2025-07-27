@@ -117,7 +117,7 @@ const techStacks = {
     { name: "Stripe", icon: faStripe, color: "text-purple-500" },
     { name: "Lottie", icon: faFeather, color: "text-pink-500" }, // No official FA icon, using feather
     { name: "Java", icon: faJava, color: "text-orange-600" },
-    { name: "Kotlin", icon: faKotlin, color: "text-purple-600" }, // No official FA icon, using Kotlin
+    { name: "Kotlin", icon: faKotlin, color: "text-purple-600" },
     { name: "Google Analytics", icon: faGoogle, color: "text-yellow-600" }, // No official FA icon, using Google
     { name: "Sentry", icon: faEye, color: "text-purple-400" }, // No official FA icon, using eye
   ],
