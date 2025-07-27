@@ -10,21 +10,21 @@ const contactInfo = [
 	{
 		icon: Mail,
 		title: "Email Us",
-		details: "hello@techorb.com",
+		details: "info@xtentechnologies.com",
 		description: "Send us an email anytime",
 	},
-	{
-		icon: Phone,
-		title: "Call Us",
-		details: "+1 (555) 123-4567",
-		description: "Mon-Fri from 8am to 6pm",
-	},
-	{
-		icon: MapPin,
-		title: "Visit Us",
-		details: "123 Tech Street, Silicon Valley, CA 94000",
-		description: "Come say hello at our office",
-	},
+	// {
+	// 	icon: Phone,
+	// 	title: "Call Us",
+	// 	details: "+1 (555) 123-4567",
+	// 	description: "Mon-Fri from 8am to 6pm",
+	// },
+	// {
+	// 	icon: MapPin,
+	// 	title: "Visit Us",
+	// 	details: "123 Tech Street, Silicon Valley, CA 94000",
+	// 	description: "Come say hello at our office",
+	// },
 ]
 
 export default function Contact() {
@@ -130,11 +130,11 @@ export default function Contact() {
 							<ul className="space-y-2 text-gray-300 text-sm">
 								<li className="flex items-center space-x-2">
 									<CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-									<span>10+ years of industry experience</span>
+									<span>6+ years of industry experience</span>
 								</li>
 								<li className="flex items-center space-x-2">
 									<CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-									<span>500+ successful projects delivered</span>
+									<span>200+ successful projects delivered</span>
 								</li>
 								<li className="flex items-center space-x-2">
 									<CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />

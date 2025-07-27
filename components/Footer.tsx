@@ -6,9 +6,11 @@ import { Globe, Code, Mail, Phone, MapPin, Twitter, Linkedin, Github, Instagram 
 const footerLinks = {
   company: [
     { name: "About Us", href: "#about" },
-    { name: "Our Team", href: "#about" },
+    // { name: "Our Team", href: "#about" },
     { name: "Careers", href: "#" },
     { name: "Contact", href: "#contact" },
+    { name: "Blog", href: "#blog" },
+
   ],
   services: [
     { name: "Web Development", href: "#services" },
@@ -16,17 +18,16 @@ const footerLinks = {
     { name: "Cloud Solutions", href: "#services" },
     { name: "AI & Automation", href: "#services" },
   ],
-  resources: [
-    { name: "Blog", href: "#blog" },
-    { name: "Case Studies", href: "#" },
-    { name: "Documentation", href: "#" },
-    { name: "Support", href: "#" },
-  ],
+  // resources: [
+  //   { name: "Case Studies", href: "#" },
+  //   { name: "Documentation", href: "#" },
+  //   { name: "Support", href: "#" },
+  // ],
   legal: [
     { name: "Privacy Policy", href: "#" },
     { name: "Terms of Service", href: "#" },
-    { name: "Cookie Policy", href: "#" },
-    { name: "GDPR", href: "#" },
+    // { name: "Cookie Policy", href: "#" },
+    // { name: "GDPR", href: "#" },
   ],
 }
 
@@ -63,8 +64,8 @@ export default function Footer() {
             <div className="flex items-center space-x-2 mb-6">
              
               <span className="text-2xl font-bold text-white"> <div className="relative p-0 m-0 flex justify-center items-center">
-          <img src="/main-logo.png" alt="Xten Logo" style={{ height: 50 }} />
-          <span className="text-xl font-bold text-white -left-6 relative">TEN</span>
+          <img src="/main-logo.png" alt="Xten Logo" style={{ height: 50 }}  />
+          <span className="text-xl font-bold text-white -left-7 top-[1.5px] relative">TEN</span>
         </div></span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed max-w-md">
@@ -74,16 +75,16 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3 text-gray-300">
                 <Mail className="w-4 h-4 text-blue-400" />
-                <span>hello@techorb.com</span>
+                <span> info@xtentechnologies.com </span>
               </div>
-              <div className="flex items-center space-x-3 text-gray-300">
+              {/* <div className="flex items-center space-x-3 text-gray-300">
                 <Phone className="w-4 h-4 text-blue-400" />
                 <span>+1 (555) 123-4567</span>
-              </div>
-              <div className="flex items-center space-x-3 text-gray-300">
+              </div> */}
+              {/* <div className="flex items-center space-x-3 text-gray-300">
                 <MapPin className="w-4 h-4 text-blue-400" />
                 <span>Silicon Valley, CA</span>
-              </div>
+              </div> */}
             </div>
           </motion.div>
 

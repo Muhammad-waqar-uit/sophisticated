@@ -1,12 +1,11 @@
 import Navigation from "@/components/Navigation"
 import Hero from "@/components/Hero"
 import About from "@/components/About"
-import Services from "@/components/Services"
-import Blog from "@/components/Blog"
+import TechStackShowcase from "@/components/tech-stack"
 import Contact from "@/components/Contact"
 import Footer from "@/components/Footer"
 import GlobeWrapper from "@/components/globe-wrapper"
-
+import FreeLancingMarquee from "@/components/marquee"
 export default function Home() {
   return (
     <main className="relative bg-black">
@@ -19,9 +18,9 @@ export default function Home() {
       <div className="relative z-10 h-screen overflow-y-auto overflow-x-hidden">
         <Navigation />
         <Hero />
+        <FreeLancingMarquee />
         <About />
-        <Services />
-        <Blog />
+        <TechStackShowcase/>
         <Contact />
         <Footer />
       </div>

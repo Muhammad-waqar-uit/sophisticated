@@ -1,55 +1,108 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code, Smartphone, Cloud, Database, Shield, Zap } from "lucide-react"
+import {
+  Code,
+  Smartphone,
+  Palette,
+  Brain,
+  Globe,
+  Users,
+  Network,
+} from "lucide-react"
 
 const services = [
+  {
+    icon: Palette,
+    title: "Design Services",
+    description:
+      "Crafting user-centric digital experiences through UI/UX design, wireframing, and visual systems that convert and retain users.",
+    features: [
+      "UX Research & Strategy",
+      "Wireframing & Prototyping",
+      "Interaction Design",
+      "Visual Identity Systems",
+    ],
+  },
+  {
+    icon: Brain,
+    title: "AI Development",
+    description:
+      "Delivering AI-powered solutions including predictive analytics, NLP, and generative AI models tailored for business automation.",
+    features: [
+      "Machine Learning Models",
+      "NLP & Generative AI",
+      "Automation Pipelines",
+      "Predictive Analytics",
+    ],
+  },
   {
     icon: Code,
     title: "Web Development",
     description:
-      "Custom web applications built with modern frameworks and technologies for optimal performance and user experience.",
-    features: ["React & Next.js", "Node.js Backend", "Responsive Design", "SEO Optimization"],
+      "Developing fast, responsive, and SEO-friendly web applications using modern frameworks like Next.js, Node.js, and React.",
+    features: [
+      "Next.js / React.js / Node.js",
+      "Frontend & Backend Dev",
+      "API Integrations",
+      "SEO Optimization",
+    ],
   },
   {
     icon: Smartphone,
-    title: "Mobile Development",
+    title: "Mobile App Development",
     description:
-      "Native and cross-platform mobile applications that deliver seamless experiences across iOS and Android devices.",
-    features: ["React Native", "Flutter", "Native iOS/Android", "App Store Deployment"],
+      "Building high-performance iOS and Android apps with native and cross-platform technologies for speed and UX.",
+    features: [
+      "Flutter / React Native",
+      "iOS & Android Apps",
+      "Backend Integration",
+      "ASO & Security",
+    ],
   },
   {
-    icon: Cloud,
-    title: "Cloud Solutions",
-    description: "Scalable cloud infrastructure and migration services to help your business grow without limitations.",
-    features: ["AWS & Azure", "DevOps & CI/CD", "Microservices", "Auto-scaling"],
+    icon: Globe,
+    title: "Digital Marketing",
+    description:
+      "Driving business growth through data-driven SEO, PPC campaigns, content marketing, and full-funnel strategies.",
+    features: [
+      "SEO & PPC Campaigns",
+      "Content Marketing",
+      "CRO Optimization",
+      "Social Media Strategy",
+    ],
   },
   {
-    icon: Database,
-    title: "Data Analytics",
+    icon: Users,
+    title: "IT Staff Augmentation",
     description:
-      "Transform your data into actionable insights with our advanced analytics and business intelligence solutions.",
-    features: ["Big Data Processing", "Machine Learning", "Real-time Analytics", "Custom Dashboards"],
+      "Flexible engineering support—hire pre-vetted developers, AI engineers, and product teams to accelerate delivery.",
+    features: [
+      "Full-Stack Developers",
+      "AI/ML Engineers",
+      "Agile Team Scaling",
+      "Remote Resource Mgmt",
+    ],
   },
   {
-    icon: Shield,
-    title: "Cybersecurity",
+    icon: Network,
+    title: "Blockchain Development",
     description:
-      "Comprehensive security solutions to protect your digital assets and ensure compliance with industry standards.",
-    features: ["Security Audits", "Penetration Testing", "Compliance", "24/7 Monitoring"],
-  },
-  {
-    icon: Zap,
-    title: "AI & Automation",
-    description:
-      "Leverage artificial intelligence and automation to streamline processes and enhance business efficiency.",
-    features: ["Process Automation", "AI Integration", "Chatbots", "Workflow Optimization"],
+      "Building secure, scalable blockchain apps with smart contracts, tokenomics, and Web3 integrations for decentralized innovation.",
+    features: [
+      "Smart Contract Dev",
+      "Asset Tokenization",
+      "dApps with Web3.js/Ethers.js",
+    ],
   },
 ]
 
 export default function Services() {
   return (
-    <section id="services" className="min-h-screen py-20 bg-gradient-to-b from-black via-gray-900 to-black">
+    <section
+      id="services"
+      className="min-h-screen py-20 bg-gradient-to-b from-black via-gray-900 to-black"
+    >
       <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"
@@ -78,7 +131,6 @@ export default function Services() {
               viewport={{ once: true }}
               whileHover={{ y: -10, scale: 1.02 }}
             >
-              {/* Gradient overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="relative z-10">
@@ -97,7 +149,10 @@ export default function Services() {
                       className="flex items-center space-x-2 text-sm text-gray-400"
                       initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: index * 0.1 + featureIndex * 0.05 }}
+                      transition={{
+                        duration: 0.4,
+                        delay: index * 0.1 + featureIndex * 0.05,
+                      }}
                       viewport={{ once: true }}
                     >
                       <div className="w-1.5 h-1.5 bg-blue-400 rounded-full" />
@@ -106,7 +161,7 @@ export default function Services() {
                   ))}
                 </div>
 
-                <motion.button
+                {/* <motion.button
                   className="mt-6 text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 flex items-center space-x-2 group/btn"
                   whileHover={{ x: 5 }}
                 >
@@ -114,9 +169,9 @@ export default function Services() {
                   <motion.div
                     className="w-4 h-4 border-t-2 border-r-2 border-blue-400 rotate-45"
                     animate={{ x: [0, 3, 0] }}
-                    transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
                   />
-                </motion.button>
+                </motion.button> */}
               </div>
             </motion.div>
           ))}

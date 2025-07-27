@@ -4,34 +4,34 @@ import { motion } from "framer-motion"
 import { Users, Award, Clock, Target } from "lucide-react"
 
 const stats = [
-  { icon: Users, label: "Happy Clients", value: "500+" },
-  { icon: Award, label: "Projects Completed", value: "1000+" },
-  { icon: Clock, label: "Years Experience", value: "10+" },
-  { icon: Target, label: "Success Rate", value: "98%" },
+  { icon: Users, label: "Happy Clients", value: "50+" },
+  { icon: Award, label: "Projects Completed", value: "200+" },
+  { icon: Clock, label: "Years Experience", value: "6+" },
+  { icon: Target, label: "Success Rate", value: "95%" },
 ]
 
-const team = [
-  {
-    name: "Sarah Johnson",
-    role: "CEO & Founder",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    name: "Michael Chen",
-    role: "CTO",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    name: "Emily Rodriguez",
-    role: "Lead Designer",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    name: "David Kim",
-    role: "Senior Developer",
-    image: "/placeholder.svg?height=300&width=300",
-  },
-]
+// const team = [
+//   {
+//     name: "Sarah Johnson",
+//     role: "CEO & Founder",
+//     image: "/placeholder.svg?height=300&width=300",
+//   },
+//   {
+//     name: "Michael Chen",
+//     role: "CTO",
+//     image: "/placeholder.svg?height=300&width=300",
+//   },
+//   {
+//     name: "Emily Rodriguez",
+//     role: "Lead Designer",
+//     image: "/placeholder.svg?height=300&width=300",
+//   },
+//   {
+//     name: "David Kim",
+//     role: "Senior Developer",
+//     image: "/placeholder.svg?height=300&width=300",
+//   },
+// ]
 
 export default function About() {
   return (
@@ -46,8 +46,8 @@ export default function About() {
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
             About  <div className="relative p-0 m-0 flex justify-center items-center">
-          <img src="/main-logo.png" alt="Xten Logo" style={{ height: 50 }} />
-          <span className="text-xl font-bold text-white -left-6 relative">TEN</span>
+          {/* <img src="/main-logo.png" alt="Xten Logo" style={{ height: 50 }} />
+          <span className="text-xl font-bold text-white -left-6 relative">TEN</span> */}
         </div>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -92,7 +92,7 @@ export default function About() {
           <div>
             <h3 className="text-3xl font-bold text-white mb-6">Our Story</h3>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Founded in 2014, XTEN began as a small startup with a big vision: to democratize technology and make
+              Founded in 2020, XTEN began as a small startup with a big vision: to democratize technology and make
               powerful software solutions accessible to businesses of all sizes.
             </p>
             <p className="text-gray-300 mb-6 leading-relaxed">
@@ -100,14 +100,14 @@ export default function About() {
               remains the same - creating innovative solutions that drive real results.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              Today, we're proud to serve clients across 30+ countries, helping them navigate the digital landscape and
+              Today, we're proud to serve clients across 10+ countries, helping them navigate the digital landscape and
               achieve their business goals through cutting-edge technology.
             </p>
           </div>
           <motion.div className="relative" whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
             <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl p-8 backdrop-blur-sm border border-white/10">
               <div className="text-center">
-                <div className="text-5xl font-bold text-blue-400 mb-2">10+</div>
+                <div className="text-5xl font-bold text-blue-400 mb-2">6+</div>
                 <div className="text-gray-300 mb-4">Years of Excellence</div>
                 <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
                   <motion.div
