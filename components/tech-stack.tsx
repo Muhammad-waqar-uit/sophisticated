@@ -77,7 +77,7 @@ import {
   faWindows as faWindowsBrand,
   faMdb as faMdbBrand,
 } from "@fortawesome/free-brands-svg-icons"
-import { faDatabase, faCloud, faCreditCard, faServer, faGem, faLeaf, faChartBar, faEye, faFeather, faCat, faBolt, faWind, faCrown, faCube, faCubes, faShieldAlt, faLock, faEnvelope, faUser, faUsers, faFileCode, faCodeBranch, faBug, faRocket, faSync, faTerminal, faTools, faWrench, faCog, faCogs, faLaptopCode, faMobileAlt, faTabletAlt, faDesktop, faCloudUploadAlt, faCloudDownloadAlt, faCloudSun, faCloudMoon, faCloudRain, faCloudShowersHeavy, faCloudMeatball, faCloudSunRain, faCloudMoonRain, faCloudBolt, faCloudArrowUp, faCloudArrowDown, faCloudArrowLeft, faCloudArrowRight, faCloudCheck, faCloudTimes, faCloudQuestion, faCloudExclamation, faCloudPlus, faCloudMinus, faCloudSlash, faCloudUpload, faCloudDownload, faCloudUploadAlt as faCloudUploadAltSolid, faCloudDownloadAlt as faCloudDownloadAltSolid, faCloudSun as faCloudSunSolid, faCloudMoon as faCloudMoonSolid, faCloudRain as faCloudRainSolid, faCloudShowersHeavy as faCloudShowersHeavySolid, faCloudMeatball as faCloudMeatballSolid, faCloudSunRain as faCloudSunRainSolid, faCloudMoonRain as faCloudMoonRainSolid, faCloudBolt as faCloudBoltSolid, faCloudArrowUp as faCloudArrowUpSolid, faCloudArrowDown as faCloudArrowDownSolid, faCloudArrowLeft as faCloudArrowLeftSolid, faCloudArrowRight as faCloudArrowRightSolid, faCloudCheck as faCloudCheckSolid, faCloudTimes as faCloudTimesSolid, faCloudQuestion as faCloudQuestionSolid, faCloudExclamation as faCloudExclamationSolid, faCloudPlus as faCloudPlusSolid, faCloudMinus as faCloudMinusSolid, faCloudSlash as faCloudSlashSolid, faCloudUpload as faCloudUploadSolid, faCloudDownload as faCloudDownloadSolid, faFeather as faFeatherSolid, faGem as faGemSolid, faCat as faCatSolid, faWind as faWindSolid, faCrown as faCrownSolid, faCube as faCubeSolid, faCubes as faCubesSolid, faShieldAlt as faShieldAltSolid, faLock as faLockSolid, faEnvelope as faEnvelopeSolid, faUser as faUserSolid, faUsers as faUsersSolid, faFileCode as faFileCodeSolid, faCodeBranch as faCodeBranchSolid, faBug as faBugSolid, faRocket as faRocketSolid, faSync as faSyncSolid, faTerminal as faTerminalSolid, faTools as faToolsSolid, faWrench as faWrenchSolid, faCog as faCogSolid, faCogs as faCogsSolid, faLaptopCode as faLaptopCodeSolid, faMobileAlt as faMobileAltSolid, faTabletAlt as faTabletAltSolid, faDesktop as faDesktopSolid, faCreditCard as faCreditCardSolid } from "@fortawesome/free-solid-svg-icons"
+import { faDatabase, faCloud, faCreditCard, faServer, faGem, faLeaf, faChartBar, faEye, faFeather, faCat, faBolt, faWind, faCrown, faCube, faCubes, faShieldAlt, faLock, faEnvelope, faUser, faUsers, faFileCode, faCodeBranch, faBug, faRocket, faSync, faTerminal, faTools, faWrench, faCog, faCogs, faLaptopCode, faMobileAlt, faTabletAlt, faDesktop, faCloudUploadAlt, faCloudDownloadAlt, faCloudSun, faCloudMoon, faCloudRain, faCloudShowersHeavy, faCloudMeatball, faCloudSunRain, faCloudMoonRain, faCloudBolt, faCloudArrowUp, faCloudArrowDown, faCloudUpload, faCloudDownload, faCloudUploadAlt as faCloudUploadAltSolid, faCloudDownloadAlt as faCloudDownloadAltSolid, faCloudSun as faCloudSunSolid, faCloudMoon as faCloudMoonSolid, faCloudRain as faCloudRainSolid, faCloudShowersHeavy as faCloudShowersHeavySolid, faCloudMeatball as faCloudMeatballSolid, faCloudSunRain as faCloudSunRainSolid, faCloudMoonRain as faCloudMoonRainSolid, faCloudBolt as faCloudBoltSolid, faCloudArrowUp as faCloudArrowUpSolid, faCloudArrowDown as faCloudArrowDownSolid, faCloudUpload as faCloudUploadSolid, faCloudDownload as faCloudDownloadSolid, faFeather as faFeatherSolid, faGem as faGemSolid, faCat as faCatSolid, faWind as faWindSolid, faCrown as faCrownSolid, faCube as faCubeSolid, faCubes as faCubesSolid, faShieldAlt as faShieldAltSolid, faLock as faLockSolid, faEnvelope as faEnvelopeSolid, faUser as faUserSolid, faUsers as faUsersSolid, faFileCode as faFileCodeSolid, faCodeBranch as faCodeBranchSolid, faBug as faBugSolid, faRocket as faRocketSolid, faSync as faSyncSolid, faTerminal as faTerminalSolid, faTools as faToolsSolid, faWrench as faWrenchSolid, faCog as faCogSolid, faCogs as faCogsSolid, faLaptopCode as faLaptopCodeSolid, faMobileAlt as faMobileAltSolid, faTabletAlt as faTabletAltSolid, faDesktop as faDesktopSolid, faCreditCard as faCreditCardSolid } from "@fortawesome/free-solid-svg-icons"
 const techStacks = {
   "front-end": [
     { name: "HTML", icon: faHtml5, color: "text-orange-500" },
@@ -90,7 +90,7 @@ const techStacks = {
     { name: "D3 Js", icon: faChartBar, color: "text-orange-400" }, // No official FA icon, using chart
     { name: "JQuery", icon: faJs, color: "text-blue-400" }, // No official FA icon, using JS
     { name: "TypeScript", icon: faJs, color: "text-blue-600" }, // No official FA icon, using JS
-    { name: "GraphQL", icon: faGraphql, color: "text-pink-500" },
+    { name: "GraphQL", icon: "", color: "text-pink-500" },
     { name: "Tailwind", icon: faWind, color: "text-cyan-400" }, // No official FA icon, using wind
   ],
   "back-end": [
@@ -102,7 +102,7 @@ const techStacks = {
     { name: "Laravel", icon: faLaravel, color: "text-red-500" },
     { name: "AWS", icon: faAws, color: "text-orange-500" },
     { name: "SQL", icon: faDatabase, color: "text-blue-400" },
-    { name: "Firebase", icon: faFirebase, color: "text-yellow-500" },
+    { name: "Firebase", icon: "", color: "text-yellow-500" },
     { name: "MONGO DB", icon: faLeaf, color: "text-green-500" }, // No official FA icon, using leaf
     { name: "Stripe", icon: faStripe, color: "text-purple-500" },
     { name: "Nest.JS", icon: faCat, color: "text-red-500" }, // No official FA icon, using cat
@@ -111,13 +111,13 @@ const techStacks = {
     { name: "Flutter", icon: faFlutter, color: "text-blue-400" },
     { name: "Android", icon: faAndroid, color: "text-green-500" },
     { name: "iOS App", icon: faApple, color: "text-gray-300" },
-    { name: "Firebase", icon: faFirebase, color: "text-yellow-500" },
+    { name: "Firebase", icon: "", color: "text-yellow-500" },
     { name: "React Native", icon: faReact, color: "text-cyan-500" },
     { name: "Swift", icon: faSwift, color: "text-orange-500" }, // No official FA icon, using Swift
     { name: "Stripe", icon: faStripe, color: "text-purple-500" },
     { name: "Lottie", icon: faFeather, color: "text-pink-500" }, // No official FA icon, using feather
     { name: "Java", icon: faJava, color: "text-orange-600" },
-    { name: "Kotlin", icon: faKotlin, color: "text-purple-600" },
+    { name: "Kotlin", icon: "", color: "text-purple-600" },
     { name: "Google Analytics", icon: faGoogle, color: "text-yellow-600" }, // No official FA icon, using Google
     { name: "Sentry", icon: faEye, color: "text-purple-400" }, // No official FA icon, using eye
   ],
@@ -174,7 +174,7 @@ export default function TechStackShowcase() {
             }}
           >
         <div className="mb-3 flex items-center justify-center">
-          {tech.icon ? (
+          {tech.icon && typeof tech.icon !== "string" ? (
             <FontAwesomeIcon icon={tech.icon} className={`text-3xl ${tech.color}`} />
           ) : (
             <div className={`text-3xl ${tech.color}`}>{tech.name[0]}</div>
