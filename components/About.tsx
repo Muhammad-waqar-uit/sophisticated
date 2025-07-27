@@ -123,7 +123,7 @@ export default function About() {
           </motion.div>
         </motion.div>
 
-        {/* Team Section */}
+        {/* Team Section
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -155,7 +155,7 @@ export default function About() {
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   )

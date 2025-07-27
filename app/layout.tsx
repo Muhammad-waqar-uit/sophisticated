@@ -3,9 +3,9 @@ import Script from 'next/script'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Xten',
+  title: 'XTEN',
   icons: {
-    icon: '/logo.svg',
+    icon: '/favicon.png',
   },
 }
 
@@ -19,7 +19,6 @@ export default function RootLayout({
       <body>
         {children}
 
-        {/* ✅ Tawk.to script */}
         <Script
           strategy="afterInteractive"
           src="https://embed.tawk.to/6884bf12828524191a31a5f0/1j138koc8"

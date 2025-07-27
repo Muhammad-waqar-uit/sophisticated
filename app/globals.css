@@ -13,12 +13,19 @@ body {
   background: rgb(var(--background-start-rgb));
   overflow: hidden;
   scroll-behavior: smooth;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 * {
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Height of your navigation bar */
 }
 
 /* Custom scrollbar */

@@ -1,15 +1,13 @@
 "use client"
-
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Code, Globe } from "lucide-react"
+import { Menu, X } from "lucide-react"
 
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Blog", href: "#blog" },
-  { name: "Contact", href: "#contact" },
+  { name: "Services", href: "/services" },
+  { name: "Blog", href: "/blog" },
 ]
 
 export default function Navigation() {
@@ -17,36 +15,20 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState("home")
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ["home", "about", "services", "blog", "contact"]
-      const scrollPosition = window.scrollY + 100
-
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const offsetTop = element.offsetTop
-          const offsetHeight = element.offsetHeight
-
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section)
-            break
-          }
-        }
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    // Set active section based on current path
+    const path = window.location.pathname
+    const section = path === "/" ? "home" : path.slice(1)
+    setActiveSection(section)
   }, [])
 
-  const scrollToSection = (href: string) => {
-    const sectionId = href.replace("#", "")
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
+  const navigateToPage = (href: string) => {
+    window.location.href = href
     setIsOpen(false)
   }
+
+  const openCalendar = () => {
+    window.open('https://cal.com/xten-technologies/30min?overlayCalendar=true&layout=month_view', '_blank');
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
@@ -67,16 +49,11 @@ export default function Navigation() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <motion.div
-            className="hidden md:flex items-center space-x-8"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => navigateToPage(item.href)}
                 className={`relative text-sm font-medium transition-colors hover:text-blue-400 ${
                   activeSection === item.href.replace("#", "") ? "text-blue-400" : "text-white/80"
                 }`}
@@ -92,7 +69,17 @@ export default function Navigation() {
                 )}
               </button>
             ))}
-          </motion.div>
+            
+            {/* Contact Button */}
+            <motion.button
+              onClick={openCalendar}
+              className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Contact Us
+            </motion.button>
+          </div>
 
           {/* Mobile Menu Button */}
           <motion.button
@@ -119,7 +106,7 @@ export default function Navigation() {
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.name}
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => navigateToPage(item.href)}
                   className={`block w-full text-left py-2 text-sm font-medium transition-colors hover:text-blue-400 ${
                     activeSection === item.href.replace("#", "") ? "text-blue-400" : "text-white/80"
                   }`}
@@ -130,6 +117,16 @@ export default function Navigation() {
                   {item.name}
                 </motion.button>
               ))}
+              {/* Mobile Contact Button */}
+              <motion.button
+                onClick={openCalendar}
+                className="w-full text-left py-2 mt-2 bg-purple-600 hover:bg-purple-700 text-white px-4 rounded-lg font-medium transition-all duration-300"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: navItems.length * 0.1 }}
+              >
+                Contact Us
+              </motion.button>
             </motion.div>
           )}
         </AnimatePresence>
