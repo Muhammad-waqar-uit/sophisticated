@@ -27,8 +27,9 @@ export default function Navigation() {
   }
 
   const openCalendar = () => {
-    window.open('https://cal.com/xten-technologies/30min?overlayCalendar=true&layout=month_view', '_blank');
+    window.location.href = 'https://cal.com/xten-technologies/30min?overlayCalendar=true&layout=month_view';
   };
+
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
