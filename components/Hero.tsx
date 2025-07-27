@@ -27,15 +27,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="max-w-4xl mx-auto"
         >
-          <motion.div
-            className="inline-flex items-center space-x-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-2 mb-8"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-          >
-            <Sparkles className="w-4 h-4 text-blue-400" />
-            <span className="text-sm text-blue-300">Innovative Software Solutions</span>
-          </motion.div>
+         
 
           <motion.h1
             className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-100 to-blue-300 bg-clip-text text-transparent"
@@ -45,7 +37,8 @@ export default function Hero() {
           >
             Building the Future
             <br />
-            <span className="text-blue-400">One Code at a Time</span>
+          <span className="from-white via-blue-100 to-blue-300">One Code at a Time</span>
+
           </motion.h1>
 
           <motion.p
@@ -66,12 +59,12 @@ export default function Hero() {
           >
             <motion.button
               onClick={scrollToContact}
-              className="group bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 flex items-center space-x-2 shadow-lg hover:shadow-blue-500/25"
+              className="group border border-white/20 hover:border-white/40 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm hover:bg-white/5 w-contain flex justify-center item-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <span>Start Your Project</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform mt-0.5 border-black" />
             </motion.button>
 
             <motion.button

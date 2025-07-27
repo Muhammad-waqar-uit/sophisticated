@@ -45,7 +45,10 @@ export default function About() {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
-            About TechOrb
+            About  <div className="relative p-0 m-0 flex justify-center items-center">
+          <img src="/main-logo.png" alt="Xten Logo" style={{ height: 50 }} />
+          <span className="text-xl font-bold text-white -left-6 relative">TEN</span>
+        </div>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             We are a passionate team of innovators, designers, and developers dedicated to creating software solutions
@@ -89,7 +92,7 @@ export default function About() {
           <div>
             <h3 className="text-3xl font-bold text-white mb-6">Our Story</h3>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Founded in 2014, TechOrb began as a small startup with a big vision: to democratize technology and make
+              Founded in 2014, XTEN began as a small startup with a big vision: to democratize technology and make
               powerful software solutions accessible to businesses of all sizes.
             </p>
             <p className="text-gray-300 mb-6 leading-relaxed">

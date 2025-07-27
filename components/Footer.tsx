@@ -33,7 +33,6 @@ const footerLinks = {
 const socialLinks = [
   { icon: Twitter, href: "#", label: "Twitter" },
   { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Github, href: "#", label: "GitHub" },
   { icon: Instagram, href: "#", label: "Instagram" },
 ]
 
@@ -62,11 +61,11 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <div className="flex items-center space-x-2 mb-6">
-              <div className="relative">
-                <Globe className="w-8 h-8 text-blue-400" />
-                <Code className="w-4 h-4 text-white absolute -bottom-1 -right-1" />
-              </div>
-              <span className="text-2xl font-bold text-white">TechOrb</span>
+             
+              <span className="text-2xl font-bold text-white"> <div className="relative p-0 m-0 flex justify-center items-center">
+          <img src="/main-logo.png" alt="Xten Logo" style={{ height: 50 }} />
+          <span className="text-xl font-bold text-white -left-6 relative">TEN</span>
+        </div></span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed max-w-md">
               We craft cutting-edge software solutions that transform businesses and create extraordinary digital
@@ -122,38 +121,6 @@ export default function Footer() {
           ))}
         </div>
 
-        Newsletter Signup
-        <motion.div
-          className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-8 mb-12 backdrop-blur-sm border border-white/10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <div className="grid md:grid-cols-2 gap-6 items-center">
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-2">Stay Updated</h3>
-              <p className="text-gray-300">
-                Get the latest insights, tips, and updates from our team delivered to your inbox.
-              </p>
-            </div>
-            <div className="flex space-x-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-              />
-              <motion.button
-                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 whitespace-nowrap"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Subscribe
-              </motion.button>
-            </div>
-          </div>
-        </motion.div>
-
         {/* Bottom Footer */}
         <motion.div
           className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10"
@@ -162,7 +129,7 @@ export default function Footer() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="text-gray-400 text-sm mb-4 md:mb-0">© 2024 TechOrb. All rights reserved.</div>
+          <div className="text-gray-400 text-sm mb-4 md:mb-0">© 2025 XTen. All rights reserved.</div>
 
           <div className="flex items-center space-x-6">
             {socialLinks.map((social, index) => (

@@ -59,10 +59,11 @@ export default function Navigation() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="relative p-0 m-0 ">
-                <img src="/main-logo.png" alt="Xten Logo" style={{ height: 50 }} />
-                <span className="text-xl font-bold text-white">XTEN</span>
-            </div>
+           <div className="relative p-0 m-0 flex justify-center items-center">
+          <img src="/main-logo.png" alt="Xten Logo" style={{ height: 50 }} />
+          <span className="text-xl font-bold text-white -left-6 relative">TEN</span>
+        </div>
+
           </motion.div>
 
           {/* Desktop Navigation */}
