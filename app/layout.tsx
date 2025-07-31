@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
+import Footer from "@/components/Footer"
+import Navigation from "@/components/Navigation"
+
 
 export const metadata: Metadata = {
   title: 'XTEN',
@@ -18,6 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
+                <Navigation />
+        
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           {children}
           <Script
@@ -32,6 +37,8 @@ export default function RootLayout({
             referrerPolicy="no-referrer"
           />
         </ThemeProvider>
+        <Footer />
+
       </body>
     </html>
   )

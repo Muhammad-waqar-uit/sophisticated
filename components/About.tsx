@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Users, Award, Clock, Target } from "lucide-react"
-
+import { BackgroundBeamsWithCollision } from "@/components/background-beams-with-collision";
 const stats = [
   { icon: Users, label: "Happy Clients", value: "50+" },
   { icon: Award, label: "Projects Completed", value: "200+" },
@@ -35,6 +35,7 @@ const stats = [
 
 export default function About() {
   return (
+        <BackgroundBeamsWithCollision>
     <section id="about" className="min-h-screen py-20 bg-gradient-to-b from-black via-gray-900 to-black">
       <div className="container mx-auto px-6">
         <motion.div
@@ -158,5 +159,7 @@ export default function About() {
         </motion.div> */}
       </div>
     </section>
+    </BackgroundBeamsWithCollision>
+
   )
 }

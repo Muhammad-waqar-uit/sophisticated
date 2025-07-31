@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
-
+import {Button} from "@/components/moveing-border"
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
@@ -22,8 +22,23 @@ export default function Navigation() {
   }, [])
 
   const navigateToPage = (href: string) => {
-    window.location.href = href
-    setIsOpen(false)
+    if (href.startsWith('#')) {
+      if (window.location.pathname !== '/') {
+        // If we're not on the home page, first navigate to home page
+        window.location.href = '/' + href;
+      } else {
+        // If we're already on home page, just scroll
+        const element = document.getElementById(href.substring(1))
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+      setIsOpen(false)
+    } else {
+      // For other pages (blog/services), use regular navigation
+      window.location.href = href
+      setIsOpen(false)
+    }
   }
 
   const openCalendar = () => {
@@ -71,14 +86,13 @@ export default function Navigation() {
             ))}
             
             {/* Contact Button */}
-            <motion.button
-              onClick={openCalendar}
-              className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <Button
+            onClick={openCalendar}
+              borderRadius="1.25rem"
+              className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
             >
               Contact Us
-            </motion.button>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}

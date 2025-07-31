@@ -49,7 +49,9 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-gradient-to-t from-black via-gray-900 to-gray-900 border-t border-white/10">
+    <footer className=" bg-black backdrop-blur-md border-b border-white/10 ">
+      {/* className="bg-gradient-to-t from-black via-gray-900 to-gray-900 border-t border-white/10"
+      className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10"> */}
       <div className="container mx-auto px-6 py-16">
         {/* Main Footer Content */}
         <div className="grid lg:grid-cols-5 gap-8 mb-12">

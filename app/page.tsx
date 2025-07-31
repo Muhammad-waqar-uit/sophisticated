@@ -1,29 +1,36 @@
-import Navigation from "@/components/Navigation"
 import Hero from "@/components/Hero"
 import About from "@/components/About"
 import TechStackShowcase from "@/components/tech-stack"
 import Contact from "@/components/Contact"
-import Footer from "@/components/Footer"
 import GlobeWrapper from "@/components/globe-wrapper"
 import FreeLancingMarquee from "@/components/marquee"
+import {TracingBeam} from "@/components/tacing-beam"
+import {MouseEffect} from "@/components/mouse-effect"
+import {WeUnoIntro} from "@/components/show-into"
+import {TimelineDemo} from "@/components/timeline-component"
 export default function Home() {
   return (
     <main className="relative bg-black">
+            <WeUnoIntro />
+
+      <MouseEffect/>
       {/* Globe Background - Fixed Position */}
       <div className="fixed inset-0 z-0">
         <GlobeWrapper />
       </div>
 
       {/* Scrollable Content */}
-      <div className="relative z-10 h-screen overflow-y-auto overflow-x-hidden">
-        <Navigation />
+          {/* <TracingBeam className="px-6"> */}
+
+      <div className="relative z-10">
         <Hero />
-        <FreeLancingMarquee />
+        {/* <FreeLancingMarquee /> */}
         <About />
+        <TimelineDemo/>
         <TechStackShowcase/>
         <Contact />
-        <Footer />
       </div>
+{/* </TracingBeam> */}
     </main>
   )
 }
