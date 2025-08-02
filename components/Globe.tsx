@@ -107,13 +107,14 @@ export default function Globe() {
     controls.rotateSpeed = 0.5
     controls.enableZoom = false
 
-    const colors = [
-      new Color(0x3a86ff), // Blue
-      new Color(0x8338ec), // Purple
-      new Color(0xff006e), // Pink
-      new Color(0xfb5607), // Orange
-      new Color(0xffbe0b), // Yellow
-    ]
+  const colors = [
+    new Color(0x4a0e18), // Dark Red
+    new Color(0x0a0a0a), // Almost Black
+    new Color(0x0b3d2e), // Dark Green-Teal
+    new Color(0x191970), // Midnight Blue
+    new Color(0x333333), // Dark Gray
+  ]
+
     let colorIndex = 0
     let nextColorIndex = 1
     let colorT = 0

@@ -148,7 +148,7 @@ export default function TechStackShowcase() {
         </div>
       </div>
 
-      {/* Tab Navigation */}
+      {/* Tab Navigation
       <div className="flex flex-wrap gap-4 mb-12 justify-center">
         {Object.keys(techStacks).map((tab) => (
           <button
@@ -161,10 +161,9 @@ export default function TechStackShowcase() {
             {tab.charAt(0).toUpperCase() + tab.slice(1).replace("-", "-")}
           </button>
         ))}
-      </div>
+      </div> */}
 
-      {/* Technology Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+      {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
         {techStacks[activeTab].map((tech, index) => (
           <div
             key={tech.name}
@@ -180,17 +179,16 @@ export default function TechStackShowcase() {
             <div className={`text-3xl ${tech.color}`}>{tech.name[0]}</div>
           )}
         </div>
-            {/* Technology Name */}
             <h3 className="text-gray-300 text-sm font-medium text-center group-hover:text-white transition-colors duration-300">
               {tech.name}
             </h3>
 
-            {/* Hover effect overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-gray-700/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
           </div>
         ))}
-      </div>
 
+      </div> */}
+      {/* <IconCloudDemo radius={600}/> */}
       {/* Decorative elements */}
       <div className="absolute top-10 right-10 w-20 h-20 border-2 border-gray-700 rounded-full opacity-30" />
       <div className="absolute bottom-20 left-10 w-16 h-16 border-2 border-gray-700 rounded-full opacity-20" />
@@ -198,3 +196,50 @@ export default function TechStackShowcase() {
     </section>
   )
 }
+
+import { IconCloud } from "@/components/magicui/icon-cloud";
+
+// const slugs = [
+//   "typescript",
+//   "javascript",
+//   "dart",
+//   "java",
+//   "react",
+//   "flutter",
+//   "android",
+//   "html5",
+//   "css3",
+//   "nodedotjs",
+//   "express",
+//   "nextdotjs",
+//   "prisma",
+//   "amazonaws",
+//   "postgresql",
+//   "firebase",
+//   "nginx",
+//   "vercel",
+//   "testinglibrary",
+//   "jest",
+//   "cypress",
+//   "docker",
+//   "git",
+//   "jira",
+//   "github",
+//   "gitlab",
+//   "visualstudiocode",
+//   "androidstudio",
+//   "sonarqube",
+//   "figma",
+// ];
+
+// export function IconCloudDemo() {
+//   const images = slugs.map(
+//     (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`,
+//   );
+
+//   return (
+//     <div className="relative flex size-full items-center justify-center overflow-hidden">
+//       <IconCloud images={images} />
+//     </div>
+//   );
+// }

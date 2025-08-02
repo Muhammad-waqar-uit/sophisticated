@@ -58,7 +58,7 @@ export default function Navigation() {
             transition={{ duration: 0.6 }}
           >
            <div className="relative p-0 m-0 flex justify-center items-center">
-          <img src="/main-logo.png" alt="Xten Logo" style={{ height: 50 }} />
+          <img src="/logo-x.png" alt="Xten Logo" style={{ height: 50 }} />
         </div>
 
           </motion.div>
@@ -87,9 +87,9 @@ export default function Navigation() {
             
             {/* Contact Button */}
             <Button
-            onClick={openCalendar}
+              onClick={openCalendar}
               borderRadius="1.25rem"
-              className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
+              className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800 font-bold"
             >
               Contact Us
             </Button>

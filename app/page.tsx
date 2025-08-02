@@ -5,7 +5,9 @@ import Contact from "@/components/Contact"
 import GlobeWrapper from "@/components/globe-wrapper"
 import FreeLancingMarquee from "@/components/marquee"
 import {TracingBeam} from "@/components/tacing-beam"
-import {MouseEffect} from "@/components/mouse-effect"
+// import {MouseEffect} from "@/components/mouse-effect"
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
+
 import {WeUnoIntro} from "@/components/show-into"
 import {TimelineDemo} from "@/components/timeline-component"
 export default function Home() {
@@ -13,7 +15,7 @@ export default function Home() {
     <main className="relative bg-black">
             <WeUnoIntro />
 
-      <MouseEffect/>
+      <SmoothCursor/>
       {/* Globe Background - Fixed Position */}
       <div className="fixed inset-0 z-0">
         <GlobeWrapper />
@@ -34,3 +36,5 @@ export default function Home() {
     </main>
   )
 }
+
+

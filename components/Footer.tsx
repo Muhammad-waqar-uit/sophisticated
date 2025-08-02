@@ -66,8 +66,7 @@ export default function Footer() {
             <div className="flex items-center space-x-2 mb-6">
              
               <span className="text-2xl font-bold text-white"> <div className="relative p-0 m-0 flex justify-center items-center">
-          <img src="/main-logo.png" alt="Xten Logo" style={{ height: 50 }}  />
-          <span className="text-xl font-bold text-white -left-7 top-[1.5px] relative">TEN</span>
+          <img src="/logo-x.png" alt="Xten Logo" style={{ height: 50 }}  />
         </div></span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed max-w-md">
