@@ -195,12 +195,19 @@ export default function Services() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => {
-                const element = document.getElementById("contact")
+              // Check if we're on the home page
+              if (window.location.pathname !== '/') {
+                // If not, redirect to home page with contact section hash
+                window.location.href = '/#contact';
+              } else {
+                // If already on home page, just scroll to contact section
+                const element = document.getElementById("contact");
                 if (element) {
-                  element.scrollIntoView({ behavior: "smooth" })
+                  element.scrollIntoView({ behavior: "smooth" });
                 }
-              }}
-            >
+              }
+            }}
+          >
               Start Your Project
             </motion.button>
           </div>

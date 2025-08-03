@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 
-export default function BlogPage() {
+export default function CareersPage() {
   return (
     <main className="pt-[80px] min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
       <div className="container mx-auto px-6 py-24">
@@ -13,10 +13,10 @@ export default function BlogPage() {
           className="text-center"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Blog Coming Soon
+            No Career Openings
           </h1>
-          <p className="text-gray-400 text-lg md:text-xl">
-            We're working on something amazing. Stay tuned!
+          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
+            We currently don't have any open positions. Please check back later or follow us on social media for updates.
           </p>
         </motion.div>
       </div>

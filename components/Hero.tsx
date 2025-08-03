@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion"
 import { ArrowRight, Sparkles } from "lucide-react"
+import { AuroraText } from "@/components/magicui/aurora-text";
+import { TypingAnimation } from "@/components/magicui/typing-animation";
 
 export default function Hero() {
   const scrollToContact = () => {
@@ -35,9 +37,13 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
           >
-            Building the Future
+            <AuroraText>
+            Building the Future</AuroraText>
             <br />
-          <span className="from-white via-blue-100 to-blue-300">One Code at a Time</span>
+          <span className="from-white via-blue-100 to-blue-300">
+            <AuroraText>One Code at a Time
+              </AuroraText>
+            </span>
 
           </motion.h1>
 

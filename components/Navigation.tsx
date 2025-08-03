@@ -3,11 +3,13 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import {Button} from "@/components/moveing-border"
+import { ShimmerButton } from "@/components/magicui/shimmer-button";
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Services", href: "/services" },
   { name: "Blog", href: "/blog" },
+  { name: "Careers", href: "/careers" }
 ]
 
 export default function Navigation() {
@@ -69,7 +71,7 @@ export default function Navigation() {
               <button
                 key={item.name}
                 onClick={() => navigateToPage(item.href)}
-                className={`relative text-sm font-medium transition-colors hover:text-blue-400 ${
+                className={`relative text-lg font-medium transition-colors hover:text-blue-400 ${
                   activeSection === item.href.replace("#", "") ? "text-blue-400" : "text-white/80"
                 }`}
               >
@@ -86,13 +88,15 @@ export default function Navigation() {
             ))}
             
             {/* Contact Button */}
-            <Button
+            <motion.button
               onClick={openCalendar}
-              borderRadius="1.25rem"
-              className="bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800 font-bold"
+              className="group border border-white/20 hover:border-white/40 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm hover:bg-white/5 w-contain flex justify-center item-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Contact Us
-            </Button>
+              <span>Contact Us</span>
+            </motion.button>
+
           </div>
 
           {/* Mobile Menu Button */}

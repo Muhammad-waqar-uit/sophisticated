@@ -5,6 +5,7 @@ import type React from "react"
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react"
+import { MagicCard } from "@/components/magicui/magic-card"
 
 const contactInfo = [
 	{
@@ -157,6 +158,10 @@ export default function Contact() {
 					>
 						<h3 className="text-2xl font-bold text-white mb-8"> Contact Us</h3>
 						<div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8">
+							 <MagicCard
+        gradientColor={'#262626' }
+        className="p-0"
+      >
 							{!isSubmitted ? (
 								<form onSubmit={handleSubmit} className="space-y-6">
 									<div className="grid md:grid-cols-2 gap-6">
@@ -292,6 +297,7 @@ export default function Contact() {
 											</>
 										)}
 									</motion.button>
+									
 								</form>
 							) : (
 								<motion.div
@@ -331,6 +337,7 @@ export default function Contact() {
 									</motion.div>
 								</motion.div>
 							)}
+							</MagicCard>
 						</div>
 					</motion.div>
 				</div>

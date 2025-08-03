@@ -3,11 +3,13 @@
 import { motion } from "framer-motion"
 import { Users, Award, Clock, Target } from "lucide-react"
 import { BackgroundBeamsWithCollision } from "@/components/background-beams-with-collision";
+import { NumberTicker } from "@/components/magicui/number-ticker";
+
 const stats = [
-  { icon: Users, label: "Happy Clients", value: "50+" },
-  { icon: Award, label: "Projects Completed", value: "200+" },
-  { icon: Clock, label: "Years Experience", value: "4+" },
-  { icon: Target, label: "Success Rate", value: "95%" },
+  { icon: Users, label: "Happy Clients", value: "50+" ,number:"50"},
+  { icon: Award, label: "Projects Completed", value: "200+" ,number:"200"},
+  { icon: Clock, label: "Years Experience", value: "4+" ,number:"4"},
+  { icon: Target, label: "Success Rate", value: "95%" ,number:"95"},
 ]
 
 // const team = [
@@ -76,7 +78,12 @@ export default function About() {
               whileHover={{ scale: 1.05 }}
             >
               <stat.icon className="w-8 h-8 text-blue-400 mx-auto mb-4" />
-              <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
+              <div className="text-3xl font-bold text-white mb-2">
+                <NumberTicker 
+                  value={Number(stat.number)} 
+                />
+                {stat.value.includes('%') ? '%' : stat.value.includes('+') ? '+' : ''}
+              </div>
               <div className="text-gray-400 text-sm">{stat.label}</div>
             </motion.div>
           ))}
