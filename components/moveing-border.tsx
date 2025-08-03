@@ -82,25 +82,44 @@ export const MovingBorder = ({
   ry?: string;
   [key: string]: any;
 }) => {
-  const pathRef = useRef<any>(null);
+  const pathRef = useRef<SVGPathElement>(null);
   const progress = useMotionValue<number>(0);
 
   useAnimationFrame((time) => {
-    const length = pathRef.current?.getTotalLength();
-    if (length) {
-      const pxPerMillisecond = length / duration;
-      progress.set((time * pxPerMillisecond) % length);
+    const path = pathRef.current;
+    if (path) {
+      try {
+        const length = path.getTotalLength();
+        if (isFinite(length) && length > 0) {
+          const pxPerMillisecond = length / duration;
+          progress.set((time * pxPerMillisecond) % length);
+        }
+      } catch (e) {
+        // Handle potential SVG measurement errors
+        console.error("Error measuring path:", e);
+      }
     }
   });
 
-  const x = useTransform(
-    progress,
-    (val) => pathRef.current?.getPointAtLength(val).x,
-  );
-  const y = useTransform(
-    progress,
-    (val) => pathRef.current?.getPointAtLength(val).y,
-  );
+  const x = useTransform(progress, (val) => {
+    if (!pathRef.current || !isFinite(val)) return 0;
+    try {
+      const point = pathRef.current.getPointAtLength(val);
+      return point.x;
+    } catch (e) {
+      return 0;
+    }
+  });
+
+  const y = useTransform(progress, (val) => {
+    if (!pathRef.current || !isFinite(val)) return 0;
+    try {
+      const point = pathRef.current.getPointAtLength(val);
+      return point.y;
+    } catch (e) {
+      return 0;
+    }
+  });
 
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
 
@@ -114,12 +133,17 @@ export const MovingBorder = ({
         height="100%"
         {...otherProps}
       >
-        <rect
+        <path
           fill="none"
-          width="100%"
-          height="100%"
-          rx={rx}
-          ry={ry}
+          d={`M ${rx || 0},0 
+            H calc(100% - ${rx || 0})
+            Q 100% 0, 100% ${ry || 0}
+            V calc(100% - ${ry || 0})
+            Q 100% 100%, calc(100% - ${rx || 0}) 100%
+            H ${rx || 0}
+            Q 0 100%, 0 calc(100% - ${ry || 0})
+            V ${ry || 0}
+            Q 0 0, ${rx || 0} 0`}
           ref={pathRef}
         />
       </svg>

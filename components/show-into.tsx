@@ -9,14 +9,41 @@ export function WeUnoIntro({
   duration?: number
 }) {
   const [showIntro, setShowIntro] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowIntro(false)
-    }, duration)
+    // Check if window exists (client-side)
+    if (typeof window !== "undefined") {
+      // Initial check
+      setIsMobile(window.innerWidth < 768)
 
-    return () => clearTimeout(timer)
-  }, [duration])
+      // Add resize listener
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 768)
+      }
+
+      window.addEventListener("resize", handleResize)
+
+      // Cleanup
+      return () => window.removeEventListener("resize", handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isMobile) {
+      const timer = setTimeout(() => {
+        setShowIntro(false)
+      }, duration)
+
+      return () => clearTimeout(timer)
+    } else {
+      // Immediately hide intro on mobile
+      setShowIntro(false)
+    }
+  }, [duration, isMobile])
+
+  // Don't render anything on mobile
+  if (isMobile) return null
 
   return (
     <AnimatePresence>
