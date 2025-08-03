@@ -148,7 +148,6 @@ export default function TechStackShowcase() {
         </div>
       </div>
 
-      {/* Tab Navigation
       <div className="flex flex-wrap gap-4 mb-12 justify-center">
         {Object.keys(techStacks).map((tab) => (
           <button
@@ -161,9 +160,9 @@ export default function TechStackShowcase() {
             {tab.charAt(0).toUpperCase() + tab.slice(1).replace("-", "-")}
           </button>
         ))}
-      </div> */}
+      </div>
 
-      {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
         {techStacks[activeTab].map((tech, index) => (
           <div
             key={tech.name}
@@ -187,7 +186,7 @@ export default function TechStackShowcase() {
           </div>
         ))}
 
-      </div> */}
+      </div>
       {/* <IconCloudDemo radius={600}/> */}
       {/* Decorative elements */}
       <div className="absolute top-10 right-10 w-20 h-20 border-2 border-gray-700 rounded-full opacity-30" />

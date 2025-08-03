@@ -6,7 +6,7 @@ import { BackgroundBeamsWithCollision } from "@/components/background-beams-with
 const stats = [
   { icon: Users, label: "Happy Clients", value: "50+" },
   { icon: Award, label: "Projects Completed", value: "200+" },
-  { icon: Clock, label: "Years Experience", value: "6+" },
+  { icon: Clock, label: "Years Experience", value: "4+" },
   { icon: Target, label: "Success Rate", value: "95%" },
 ]
 
@@ -108,7 +108,7 @@ export default function About() {
           <motion.div className="relative" whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
             <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl p-8 backdrop-blur-sm border border-white/10">
               <div className="text-center">
-                <div className="text-5xl font-bold text-blue-400 mb-2">6+</div>
+                <div className="text-5xl font-bold text-blue-400 mb-2">4+</div>
                 <div className="text-gray-300 mb-4">Years of Excellence</div>
                 <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
                   <motion.div
