@@ -1,50 +1,82 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
 import { Globe, Code, Mail, Phone, MapPin, Twitter, Linkedin, Github, Instagram } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useActiveSection } from "./Navigation"
 
 const footerLinks = {
   company: [
     { name: "About Us", href: "#about" },
     // { name: "Our Team", href: "#about" },
-    { name: "Careers", href: "#" },
+    { name: "Careers", href: "/careers" },
     { name: "Contact", href: "#contact" },
-    { name: "Blog", href: "#blog" },
+    { name: "Blog", href: "/blog" },
 
   ],
   services: [
-    { name: "Web Development", href: "#services" },
-    { name: "Mobile Apps", href: "#services" },
-    { name: "Cloud Solutions", href: "#services" },
-    { name: "AI & Automation", href: "#services" },
+    { name: "Web Development", href: "/services" },
+    { name: "Mobile Apps", href: "/services" },
+    { name: "Cloud Solutions", href: "/services" },
+    { name: "AI & Automation", href: "/services" },
   ],
   // resources: [
   //   { name: "Case Studies", href: "#" },
   //   { name: "Documentation", href: "#" },
   //   { name: "Support", href: "#" },
   // ],
-  legal: [
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms of Service", href: "#" },
+  // legal: [
+    // { name: "Privacy Policy", href: "#" },
+    // { name: "Terms of Service", href: "#" },
     // { name: "Cookie Policy", href: "#" },
     // { name: "GDPR", href: "#" },
-  ],
+  // ],
 }
 
 const socialLinks = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Instagram, href: "#", label: "Instagram" },
+  // { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/xten-technology", label: "LinkedIn" },
+  // { icon: Instagram, href: "#", label: "Instagram" },
 ]
 
 export default function Footer() {
-  const scrollToSection = (href: string) => {
-    if (href.startsWith("#")) {
-      const sectionId = href.replace("#", "")
-      const element = document.getElementById(sectionId)
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" })
+  const router = useRouter()
+  // Use the shared active section state
+  const { activeSection, setActiveSection } = useActiveSection()
+
+  const navigateToPage = (href: string) => {
+    if (href.startsWith('#')) {
+      const sectionName = href.replace('#', '')
+      
+      if (window.location.pathname !== '/') {
+        // If we're not on the home page, first navigate to home page
+        window.location.href = '/' + href;
+      } else {
+        // If we're already on home page, just scroll smoothly
+        const element = document.getElementById(sectionName)
+        if (element) {
+          // First update the active section for a smooth animation
+          setActiveSection(sectionName)
+          
+          // Then scroll to the section
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' })
+          }, 10)
+        }
       }
+    } else {
+      // For other pages (blog/services), use regular navigation
+      // Extract the route name without leading slash
+      const routeName = href.replace('/', '')
+      
+      // Update the active section first for the animation
+      setActiveSection(routeName)
+      
+      // Use setTimeout to allow the animation to play before navigation
+      setTimeout(() => {
+        router.push(href)
+      }, 100)
     }
   }
 
@@ -64,10 +96,16 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <div className="flex items-center space-x-2 mb-6">
-             
-              <span className="text-2xl font-bold text-white"> <div className="relative p-0 m-0 flex justify-center items-center">
-          <img src="/logo-x.png" alt="Xten Logo" style={{ height: 50 }}  />
-        </div></span>
+              <span className="text-2xl font-bold text-white">
+                <div
+                  className="relative p-0 m-0 flex justify-center items-center cursor-pointer"
+                  onClick={() => router.push("/")}
+                  title="Go to Home"
+                  style={{ display: "inline-block" }}
+                >
+                  <img src="/logo-x.png" alt="Xten Logo" style={{ height: 50 }} />
+                </div>
+              </span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed max-w-md">
               We craft cutting-edge software solutions that transform businesses and create extraordinary digital
@@ -76,7 +114,13 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3 text-gray-300">
                 <Mail className="w-4 h-4 text-blue-400" />
-                <span> info@xtentechnologies.com </span>
+                <a
+                  href="mailto:info@xtentechnologies.com"
+                  className="hover:text-blue-400 transition-colors duration-300"
+                  title="Send Email"
+                >
+                  info@xtentechnologies.com
+                </a>
               </div>
               {/* <div className="flex items-center space-x-3 text-gray-300">
                 <Phone className="w-4 h-4 text-blue-400" />
@@ -111,10 +155,22 @@ export default function Footer() {
                 {links.map((link) => (
                   <li key={link.name}>
                     <button
-                      onClick={() => scrollToSection(link.href)}
-                      className="text-gray-400 hover:text-blue-400 transition-colors duration-300 text-sm"
+                      onClick={() => navigateToPage(link.href)}
+                      className={`relative text-sm transition-colors hover:text-blue-400 ${
+                        activeSection === (link.href.startsWith('#') ? link.href.replace("#", "") : link.href.replace("/", "")) 
+                          ? "text-blue-400" 
+                          : "text-gray-400"
+                      }`}
                     >
                       {link.name}
+                      {activeSection === (link.href.startsWith('#') ? link.href.replace("#", "") : link.href.replace("/", "")) && (
+                        <motion.div
+                          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-400"
+                          layoutId="footerActiveTab"
+                          initial={false}
+                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        />
+                      )}
                     </button>
                   </li>
                 ))}

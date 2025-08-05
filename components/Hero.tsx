@@ -13,11 +13,9 @@ export default function Hero() {
     }
   }
 
-  const scrollToServices = () => {
-    const element = document.getElementById("services")
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
+
+  const goToServices = () => {
+    window.location.href = "/services";
   }
 
   return (
@@ -74,7 +72,7 @@ export default function Hero() {
             </motion.button>
 
             <motion.button
-              onClick={scrollToServices}
+              onClick={goToServices}
               className="group border border-white/20 hover:border-white/40 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm hover:bg-white/5"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

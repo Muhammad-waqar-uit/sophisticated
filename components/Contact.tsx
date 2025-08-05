@@ -113,7 +113,13 @@ export default function Contact() {
 									</div>
 									<div>
 										<h4 className="text-white font-semibold mb-1">{info.title}</h4>
-										<p className="text-blue-400 font-medium mb-1">{info.details}</p>
+											<p className="text-blue-400 font-medium mb-1">
+											{info.title === "Email Us" ? (
+												<a href={`mailto:${info.details}`} className="underline hover:text-blue-300">{info.details}</a>
+											) : (
+												info.details
+											)}
+											</p>
 										<p className="text-gray-400 text-sm">{info.description}</p>
 									</div>
 								</motion.div>
@@ -159,9 +165,9 @@ export default function Contact() {
 						<h3 className="text-2xl font-bold text-white mb-8"> Contact Us</h3>
 						<div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8">
 							 <MagicCard
-        gradientColor={'#262626' }
-        className="p-0"
-      >
+		gradientColor={'#262626' }
+		className="p-0"
+	  >
 							{!isSubmitted ? (
 								<form onSubmit={handleSubmit} className="space-y-6">
 									<div className="grid md:grid-cols-2 gap-6">

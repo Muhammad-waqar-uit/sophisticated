@@ -101,7 +101,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="min-h-screen py-20 bg-gradient-to-b from-black via-gray-900 to-black"
+      className="min-h-screen py-20 bg-gradient-to-b from-black via-gray-900 to-black rounded-3xl"
     >
       <div className="container mx-auto px-6">
         <motion.div

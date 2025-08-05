@@ -12,33 +12,76 @@ const navItems = [
   { name: "Careers", href: "/careers" }
 ]
 
-export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false)
+// Create a shared active section state that can be used by both Navigation and Footer
+export const useActiveSection = () => {
   const [activeSection, setActiveSection] = useState("home")
 
   useEffect(() => {
     // Set active section based on current path
     const path = window.location.pathname
-    const section = path === "/" ? "home" : path.slice(1)
-    setActiveSection(section)
+    if (path === '/') {
+      setActiveSection('home')
+    } else if (path.startsWith('/blog')) {
+      setActiveSection('blog')
+    } else if (path.startsWith('/careers')) {
+      setActiveSection('careers')
+    } else if (path.startsWith('/services')) {
+      setActiveSection('services')
+    } else {
+      // Remove leading slash and use as section name
+      setActiveSection(path.slice(1))
+    }
+
+    // Also listen for hash changes to update active section
+    const handleHashChange = () => {
+      if (window.location.pathname === '/' && window.location.hash) {
+        setActiveSection(window.location.hash.replace('#', ''))
+      }
+    }
+
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
+
+  return { activeSection, setActiveSection }
+}
+
+export default function Navigation() {
+  const [isOpen, setIsOpen] = useState(false)
+  const { activeSection, setActiveSection } = useActiveSection()
 
   const navigateToPage = (href: string) => {
     if (href.startsWith('#')) {
+      const sectionName = href.replace('#', '')
+      
+      // Update active section first for smooth animation
+      setActiveSection(sectionName)
+      
       if (window.location.pathname !== '/') {
         // If we're not on the home page, first navigate to home page
-        window.location.href = '/' + href;
+        setTimeout(() => {
+          window.location.href = '/' + href;
+        }, 100)
       } else {
         // If we're already on home page, just scroll
-        const element = document.getElementById(href.substring(1))
+        const element = document.getElementById(sectionName)
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
+          // Small delay to allow animation to start
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' })
+          }, 10)
         }
       }
       setIsOpen(false)
     } else {
       // For other pages (blog/services), use regular navigation
-      window.location.href = href
+      const routeName = href.replace('/', '')
+      setActiveSection(routeName)
+      
+      // Small delay to allow animation to start
+      setTimeout(() => {
+        window.location.href = href
+      }, 100)
       setIsOpen(false)
     }
   }
@@ -59,7 +102,7 @@ export default function Navigation() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-           <div className="relative p-0 m-0 flex justify-center items-center">
+           <div className="relative p-0 m-0 flex justify-center items-center cursor-pointer" onClick={() => window.location.href = '/'}>
           <img src="/logo-x.png" alt="Xten Logo" style={{ height: 50 }} />
         </div>
 
@@ -67,7 +110,7 @@ export default function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
+            {/* {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => navigateToPage(item.href)}
@@ -86,7 +129,28 @@ export default function Navigation() {
                 )}
               </button>
             ))}
-            
+             */}
+             {navItems.map((item) => (
+                  <button
+                    key={item.name}
+                    onClick={() => navigateToPage(item.href)}
+                    className={`relative text-lg font-medium transition-colors hover:text-blue-400 ${
+                      activeSection === (item.href.startsWith('#') ? item.href.replace("#", "") : item.href.replace("/", "")) 
+                        ? "text-blue-400" 
+                        : "text-white/80"
+                    }`}
+                  >
+                    {item.name}
+                    {activeSection === (item.href.startsWith('#') ? item.href.replace("#", "") : item.href.replace("/", "")) && (
+                      <motion.div
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-400"
+                        layoutId="activeTab"
+                        initial={false}
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    )}
+                  </button>
+            ))}
             {/* Contact Button */}
             <motion.button
               onClick={openCalendar}
