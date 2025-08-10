@@ -8,7 +8,7 @@ import { NumberTicker } from "@/components/magicui/number-ticker";
 const stats = [
   { icon: Users, label: "Happy Clients", value: "50+" ,number:"50"},
   { icon: Award, label: "Projects Completed", value: "200+" ,number:"200"},
-  { icon: Clock, label: "Years Experience", value: "5+" ,number:"4"},
+  { icon: Clock, label: "Years Experience", value: "5+" ,number:"5"},
   { icon: Target, label: "Success Rate", value: "95%" ,number:"95"},
 ]
 
