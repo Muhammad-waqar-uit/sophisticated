@@ -137,7 +137,7 @@ export default function Contact() {
 							<ul className="space-y-2 text-gray-300 text-sm">
 								<li className="flex items-center space-x-2">
 									<CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-									<span>4+ years of industry experience</span>
+									<span>5s+ years of industry experience</span>
 								</li>
 								<li className="flex items-center space-x-2">
 									<CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
