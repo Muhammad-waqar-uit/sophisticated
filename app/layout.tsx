@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
+import { ActiveSectionProvider } from "@/components/active-section-context";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://xtentechnologies.com"),
@@ -71,6 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <ActiveSectionProvider>
         <Navigation />
 
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
@@ -90,6 +92,7 @@ export default function RootLayout({
         </ThemeProvider>
 
         <Footer />
+        </ActiveSectionProvider>
       </body>
     </html>
   );

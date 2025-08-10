@@ -1,72 +1,36 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import {Button} from "@/components/moveing-border"
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
+import { useRouter } from "next/navigation"
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Services", href: "/services" },
-  { name: "Blogs", href: "/blog" },
+  { name: "Blogs", href: "/blogs" },
   { name: "Careers", href: "/careers" }
 ]
 
-// Create a shared active section state that can be used by both Navigation and Footer
-export const useActiveSection = () => {
-  const [activeSection, setActiveSection] = useState("home")
-
-  useEffect(() => {
-    // Set active section based on current path
-    const path = window.location.pathname
-    if (path === '/') {
-      setActiveSection('home')
-    } else if (path.startsWith('/blog')) {
-      setActiveSection('blog')
-    } else if (path.startsWith('/careers')) {
-      setActiveSection('careers')
-    } else if (path.startsWith('/services')) {
-      setActiveSection('services')
-    } else {
-      // Remove leading slash and use as section name
-      setActiveSection(path.slice(1))
-    }
-
-    // Also listen for hash changes to update active section
-    const handleHashChange = () => {
-      if (window.location.pathname === '/' && window.location.hash) {
-        setActiveSection(window.location.hash.replace('#', ''))
-      }
-    }
-
-    window.addEventListener('hashchange', handleHashChange)
-    return () => window.removeEventListener('hashchange', handleHashChange)
-  }, [])
-
-  return { activeSection, setActiveSection }
-}
+import { useActiveSection } from "./active-section-context"
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const { activeSection, setActiveSection } = useActiveSection()
+  const router = useRouter()
 
   const navigateToPage = (href: string) => {
     if (href.startsWith('#')) {
       const sectionName = href.replace('#', '')
-      
-      // Update active section first for smooth animation
       setActiveSection(sectionName)
-      
       if (window.location.pathname !== '/') {
-        // If we're not on the home page, first navigate to home page
         setTimeout(() => {
-          window.location.href = '/' + href;
+          router.push('/' + href)
         }, 100)
       } else {
-        // If we're already on home page, just scroll
         const element = document.getElementById(sectionName)
         if (element) {
-          // Small delay to allow animation to start
           setTimeout(() => {
             element.scrollIntoView({ behavior: 'smooth' })
           }, 10)
@@ -74,13 +38,10 @@ export default function Navigation() {
       }
       setIsOpen(false)
     } else {
-      // For other pages (blog/services), use regular navigation
       const routeName = href.replace('/', '')
       setActiveSection(routeName)
-      
-      // Small delay to allow animation to start
       setTimeout(() => {
-        window.location.href = href
+        router.push(href)
       }, 100)
       setIsOpen(false)
     }

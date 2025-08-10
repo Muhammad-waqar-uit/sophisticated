@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, Variants } from "framer-motion"
 import {
   Code,
   Smartphone,
@@ -97,6 +97,38 @@ const services = [
   },
 ]
 
+// Animation variants
+const gridVariants: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+}
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 35 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: "easeOut",
+    },
+  },
+}
+
+const featureVariants: Variants = {
+  hidden: { opacity: 0, x: -10 },
+  show: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.35, delay: i * 0.05 },
+  }),
+}
+
 export default function Services() {
   return (
     <section
@@ -105,11 +137,11 @@ export default function Services() {
     >
       <div className="container mx-auto px-6">
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
             Our Services
@@ -120,19 +152,21 @@ export default function Services() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.18 }}
+        >
+          {services.map((service) => (
             <motion.div
               key={service.title}
+              variants={cardVariants}
               className="group relative p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all duration-300"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
               whileHover={{ y: -10, scale: 1.02 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-blue-500/30 transition-colors duration-300">
@@ -141,43 +175,24 @@ export default function Services() {
                   <h3 className="text-2xl font-bold text-white mb-3">{service.title}</h3>
                   <p className="text-gray-300 leading-relaxed">{service.description}</p>
                 </div>
-
                 <div className="space-y-2">
-                  {service.features.map((feature, featureIndex) => (
+                  {service.features.map((feature, i) => (
                     <motion.div
                       key={feature}
+                      custom={i}
+                      variants={featureVariants}
                       className="flex items-center space-x-2 text-sm text-gray-400"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.4,
-                        delay: index * 0.1 + featureIndex * 0.05,
-                      }}
-                      viewport={{ once: true }}
                     >
                       <div className="w-1.5 h-1.5 bg-blue-400 rounded-full" />
                       <span>{feature}</span>
                     </motion.div>
                   ))}
                 </div>
-
-                {/* <motion.button
-                  className="mt-6 text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 flex items-center space-x-2 group/btn"
-                  whileHover={{ x: 5 }}
-                >
-                  <span>Learn More</span>
-                  <motion.div
-                    className="w-4 h-4 border-t-2 border-r-2 border-blue-400 rotate-45"
-                    animate={{ x: [0, 3, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  />
-                </motion.button> */}
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* CTA Section */}
         <motion.div
           className="text-center mt-16"
           initial={{ opacity: 0, y: 30 }}
@@ -195,19 +210,14 @@ export default function Services() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => {
-              // Check if we're on the home page
-              if (window.location.pathname !== '/') {
-                // If not, redirect to home page with contact section hash
-                window.location.href = '/#contact';
-              } else {
-                // If already on home page, just scroll to contact section
-                const element = document.getElementById("contact");
-                if (element) {
-                  element.scrollIntoView({ behavior: "smooth" });
+                if (window.location.pathname !== "/") {
+                  window.location.href = "/#contact"
+                } else {
+                  const el = document.getElementById("contact")
+                  if (el) el.scrollIntoView({ behavior: "smooth" })
                 }
-              }
-            }}
-          >
+              }}
+            >
               Start Your Project
             </motion.button>
           </div>

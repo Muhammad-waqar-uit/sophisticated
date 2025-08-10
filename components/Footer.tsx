@@ -1,10 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Globe, Code, Mail, Phone, MapPin, Twitter, Linkedin, Github, Instagram } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { useActiveSection } from "./Navigation"
 
 const footerLinks = {
   company: [
@@ -42,8 +41,7 @@ const socialLinks = [
 
 export default function Footer() {
   const router = useRouter()
-  // Use the shared active section state
-  const { activeSection, setActiveSection } = useActiveSection()
+  const [activeFooterLink, setActiveFooterLink] = useState("")
 
   const navigateToPage = (href: string) => {
     if (href.startsWith('#')) {
@@ -57,7 +55,7 @@ export default function Footer() {
         const element = document.getElementById(sectionName)
         if (element) {
           // First update the active section for a smooth animation
-          setActiveSection(sectionName)
+          setActiveFooterLink(sectionName)
           
           // Then scroll to the section
           setTimeout(() => {
@@ -71,7 +69,7 @@ export default function Footer() {
       const routeName = href.replace('/', '')
       
       // Update the active section first for the animation
-      setActiveSection(routeName)
+      setActiveFooterLink(routeName)
       
       // Use setTimeout to allow the animation to play before navigation
       setTimeout(() => {
@@ -157,13 +155,13 @@ export default function Footer() {
                     <button
                       onClick={() => navigateToPage(link.href)}
                       className={`relative text-sm transition-colors hover:text-blue-400 ${
-                        activeSection === (link.href.startsWith('#') ? link.href.replace("#", "") : link.href.replace("/", "")) 
+                        activeFooterLink === (link.href.startsWith('#') ? link.href.replace("#", "") : link.href.replace("/", "")) 
                           ? "text-blue-400" 
                           : "text-gray-400"
                       }`}
                     >
                       {link.name}
-                      {activeSection === (link.href.startsWith('#') ? link.href.replace("#", "") : link.href.replace("/", "")) && (
+                      {activeFooterLink === (link.href.startsWith('#') ? link.href.replace("#", "") : link.href.replace("/", "")) && (
                         <motion.div
                           className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-400"
                           layoutId="footerActiveTab"
