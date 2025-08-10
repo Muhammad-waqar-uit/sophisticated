@@ -8,6 +8,7 @@ import Navigation from "@/components/Navigation"
 
 export const metadata: Metadata = {
   title: 'XTEN',
+  description:'XTEN',
   icons: {
     icon: '/favicon.png',
   },
