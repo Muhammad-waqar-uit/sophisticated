@@ -128,4 +128,12 @@ html {
     transform: rotate(-5deg) scale(0.9);
     }
   }
+  @keyframes rainbow {
+  0% {
+    background-position: 0%;
+    }
+  100% {
+    background-position: 200%;
+    }
+  }
 }

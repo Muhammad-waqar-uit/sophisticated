@@ -163,7 +163,7 @@ export default function Navigation() {
               {/* Mobile Contact Button */}
               <motion.button
                 onClick={openCalendar}
-                className="w-full text-left py-2 mt-2 bg-purple-600 hover:bg-purple-700 text-white px-4 rounded-lg font-medium transition-all duration-300"
+                className="group border border-white/20 hover:border-white/40 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm hover:bg-white/5 w-contain flex justify-center item-center gap-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: navItems.length * 0.1 }}
