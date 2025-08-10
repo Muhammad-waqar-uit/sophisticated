@@ -21,6 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+       <head>
+        <title>XTEN</title>
+      </head>
       <body suppressHydrationWarning>
                 <Navigation />
         
