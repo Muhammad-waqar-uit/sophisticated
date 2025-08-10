@@ -68,14 +68,17 @@ export function TimelineDemo() {
       ),
     },
     {
-      title: "2021–2022",
+      title: "2020–2022",
       content: (
         <div>
           <section>
-            <h2 className="text-xl font-semibold mb-2">Web & Mobile App Development</h2>
+            <h2 className="text-xl font-semibold mb-2">
+              Web & Mobile Development + Social Media & Brand Tools
+            </h2>
             <p className="mb-4 text-sm text-neutral-800 dark:text-neutral-200">
-              During 2021–2022, we built scalable web and mobile platforms for startups and enterprises. We
-              leveraged modern frameworks to ensure performance and cross-platform consistency.
+              From 2020 to 2022, we delivered high-impact digital solutions ranging from scalable web
+              and mobile applications to comprehensive social media and brand tools. Our work spanned
+              modern app development, digital marketing, and brand identity creation.
             </p>
             <h3 className="text-md font-medium">Key Deliverables:</h3>
             <ul className="list-disc list-inside mb-6 text-sm">
@@ -83,6 +86,10 @@ export function TimelineDemo() {
               <li><strong>Web Platforms:</strong> Responsive, SEO-optimized, and API-driven.</li>
               <li><strong>Admin Dashboards:</strong> For analytics and operations.</li>
               <li><strong>Authentication & Security:</strong> Best practices across all apps.</li>
+              <li><strong>Social Media Marketing:</strong> Growth strategies for Instagram, LinkedIn & Twitter.</li>
+              <li><strong>Automation Tools:</strong> For scheduling and analytics.</li>
+              <li><strong>Brand Kits & Visuals:</strong> Templates, logos, and assets.</li>
+              <li><strong>Landing Pages:</strong> Fast-deploy, optimized pages.</li>
             </ul>
           </section>
           <div className="grid grid-cols-2 gap-4">
@@ -94,32 +101,9 @@ export function TimelineDemo() {
                 className="h-20 w-full md:h-44 lg:h-60 rounded-lg object-contain shadow"
               />
             ))}
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: "2020–2021",
-      content: (
-        <div>
-          <section>
-            <h2 className="text-xl font-semibold mb-2">Social Media & Brand Tools</h2>
-            <p className="mb-4 text-sm text-neutral-800 dark:text-neutral-200">
-              In our early years, we provided social media services and lightweight SaaS tools to help brands
-              launch their digital presence. We offered both strategic and technical support.
-            </p>
-            <h3 className="text-md font-medium">Key Deliverables:</h3>
-            <ul className="list-disc list-inside mb-6 text-sm">
-              <li><strong>Social Media Marketing:</strong> Growth strategies for Instagram, LinkedIn & Twitter.</li>
-              <li><strong>Automation Tools:</strong> For scheduling and analytics.</li>
-              <li><strong>Brand Kits & Visuals:</strong> Templates, logos, and assets.</li>
-              <li><strong>Landing Pages:</strong> Fast-deploy, optimized pages.</li>
-            </ul>
-          </section>
-          <div className="grid grid-cols-2 gap-4">
-            {[1, 2].map((i) => (
+            {[1].map((i) => (
               <img
-                key={i}
+                key={`MB-${i}`}
                 src={`MB-${i}.png`}
                 alt={`social project ${i}`}
                 className="h-20 w-full md:h-44 lg:h-60 rounded-lg object-contain shadow"
