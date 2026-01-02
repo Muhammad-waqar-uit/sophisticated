@@ -185,7 +185,7 @@ export default function Footer() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="text-gray-400 text-sm mb-4 md:mb-0">© 2025 XTen. All rights reserved.</div>
+          <div className="text-gray-400 text-sm mb-4 md:mb-0">© 2026 XTen. All rights reserved.</div>
 
           <div className="flex items-center space-x-6">
             {socialLinks.map((social, index) => (
