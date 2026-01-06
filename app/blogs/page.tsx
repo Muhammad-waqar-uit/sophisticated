@@ -1,484 +1,452 @@
 "use client"
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Calendar, Clock, User, ArrowLeft, ChevronRight } from "lucide-react"
+import React, { useState } from 'react';
+import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 import Starfield from "@/components/Starfield"
 
-// Blog data structure
+const XTENBlogPages = () => {
+  const [currentPage, setCurrentPage] = useState('home');
+
 const blogPosts = [
-//   {
-//     id: 1,
-//     title: "Introduction to Large Language Models",
-//     excerpt: "Discover the fundamentals of LLMs and why they're revolutionizing AI development.",
-//     category: "AI Fundamentals",
-//     readTime: "5 min read",
-//     date: "August 10, 2025",
-//     author: "Tech Team",
-//     image: "/placeholder.jpg",
-//     content: `
-//       <h2>The Rise of Large Language Models</h2>
-//       <p>Congratulations. You are taking a step in the right direction learning about Large Language Models. This is great. The road ahead is exciting and very perilous. But I can assure you it will be an amazing ride learning about all of the exciting things happening in the wonderful world of AI.</p>
-      
-//       <p>While libraries and applications such as vLLM and Ollama allow us to host LLMs efficiently without any hassle it is always good to go back to basics so as to learn how these huge libraries may be processing things in the backend.</p>
-      
-//       <h3>What Are Large Language Models?</h3>
-//       <p>Large Language Models are computational behemoths that require serious processing power. Your GPU is the secret weapon that transforms these models from theoretical concepts into practical, responsive AI assistants.</p>
-      
-//       <h3>The Future of AI</h3>
-//       <p>By leveraging GPU acceleration, you can run state-of-the-art language models right on your personal computer, opening up a world of possibilities for developers, researchers, and AI enthusiasts.</p>
-//     `
-//   },
-//   {
-//     id: 2,
-//     title: "GPU Acceleration for Machine Learning",
-//     excerpt: "Learn why GPU acceleration is crucial for running LLMs efficiently on your local machine.",
-//     category: "Hardware",
-//     readTime: "7 min read",
-//     date: "August 9, 2025",
-//     author: "Tech Team",
-//     image: "/placeholder.jpg",
-//     content: `
-//       <h2>Why GPU Acceleration Matters</h2>
-//       <p>Modern LLMs are computational behemoths that require serious processing power. Your GPU is the secret weapon that transforms these models from theoretical concepts into practical, responsive AI assistants.</p>
-      
-//       <h3>Hardware Requirements</h3>
-//       <p>Before diving into LLM deployment, let's ensure your machine is ready for the challenge:</p>
-//       <ul>
-//         <li><strong>Hardware Verification:</strong> You'll need a modern GPU with sufficient VRAM (>10GB at least). NVIDIA GPUs are typically the go-to choice for machine learning workloads.</li>
-//         <li><strong>Driver Installation:</strong> Ensure you have the latest NVIDIA drivers installed</li>
-//         <li><strong>CUDA Compatibility:</strong> Check your CUDA version compatibility</li>
-//       </ul>
-      
-//       <h3>Checking GPU Compatibility</h3>
-//       <p>Open your command prompt and run the <code>nvidia-smi</code> command. This command reveals crucial information about your GPU drivers and CUDA version.</p>
-      
-//       <pre><code>Thu Dec 28 15:58:29 2023       
-// +---------------------------------------------------------------------------------------+
-// | NVIDIA-SMI 535.98                 Driver Version: 535.98       CUDA Version: 12.2     |
-// |-----------------------------------------+----------------------+----------------------+
-// | GPU  Name                     TCC/WDDM  | Bus-Id        Disp.A | Volatile Uncorr. ECC |
-// | Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
-// |                                         |                      |               MIG M. |
-// |=========================================+======================+======================|
-// |   0  NVIDIA GeForce RTX 3070 ...  WDDM  | 00000000:01:00.0 Off |                  N/A |
-// | N/A   41C    P8              11W /  94W |     59MiB /  8192MiB |      0%      Default |</code></pre>
-//     `
-//   },
-//   {
-//     id: 3,
-//     title: "Setting Up Your Development Environment",
-//     excerpt: "Complete guide to setting up WSL, Python, and essential tools for LLM development.",
-//     category: "Setup Guide",
-//     readTime: "10 min read",
-//     date: "August 8, 2025",
-//     author: "Tech Team",
-//     image: "/placeholder.jpg",
-//     content: `
-//       <h2>Development Environment Setup</h2>
-      
-//       <h3>Choosing Your Tools</h3>
-//       <p>For this journey, we'll be using Visual Studio Code which is a versatile, free, and open-source integrated development environment (IDE).</p>
-      
-//       <p>What we love about Visual Studio Code:</p>
-//       <ul>
-//         <li>Free and open-source</li>
-//         <li>Maintained by Microsoft</li>
-//         <li>Cross-platform compatibility</li>
-//         <li>Intelligent Python integration</li>
-//       </ul>
-      
-//       <h3>Windows Subsystem for Linux (WSL)</h3>
-//       <p>Why WSL? Libraries like accelerate and bitsandbytes prefer a Linux environment. WSL bridges this gap, allowing you to harness the full potential of these libraries on your Windows machine.</p>
-      
-//       <h4>WSL Installation Steps</h4>
-//       <ol>
-//         <li>Open command prompt as an administrator</li>
-//         <li>List available distributions: <code>wsl --list --online</code></li>
-//         <li>Install your preferred distribution: <code>wsl --install -d Ubuntu-22.04</code></li>
-//         <li>Set up username and password</li>
-//       </ol>
-      
-//       <h3>Python Environment with Miniconda</h3>
-//       <p>Create a dedicated virtual environment for your LLM project:</p>
-//       <pre><code>conda create -n testing_llm python=3.11.5
-// conda activate testing_llm</code></pre>
-//     `
-//   },
-//   {
-//     id: 4,
-//     title: "Essential Libraries and Dependencies",
-//     excerpt: "Comprehensive list of required Python libraries for LLM deployment and development.",
-//     category: "Development",
-//     readTime: "6 min read",
-//     date: "August 7, 2025",
-//     author: "Tech Team",
-//     image: "/placeholder.jpg",
-//     content: `
-//       <h2>Essential Libraries for LLM Deployment</h2>
-//       <p>Your requirements.txt is your roadmap to success. Key libraries include:</p>
-      
-//       <h3>Core Libraries</h3>
-//       <ul>
-//         <li><strong>transformers:</strong> Hugging Face's transformer library</li>
-//         <li><strong>torch:</strong> PyTorch for deep learning</li>
-//         <li><strong>accelerate:</strong> Efficient training and inference</li>
-//         <li><strong>bitsandbytes:</strong> Quantization techniques</li>
-//         <li><strong>fastapi:</strong> Web framework for API endpoints</li>
-//       </ul>
-      
-//       <h3>Installation</h3>
-//       <p>Install all dependencies using:</p>
-//       <pre><code>pip install -r requirements.txt</code></pre>
-      
-//       <h3>Key Dependencies Explained</h3>
-//       <p><strong>Accelerate:</strong> This library provides efficient distributed training and inference capabilities.</p>
-//       <p><strong>BitsAndBytes:</strong> Essential for quantization techniques that allow you to run large models on consumer hardware.</p>
-//       <p><strong>FastAPI:</strong> Modern, fast web framework for building APIs with Python.</p>
-      
-//       <p><em>Pro Tip:</em> Make some tea while the libraries are loading, watch a movie while the model is loading. Model downloads and installations take time!</p>
-//     `
-//   },
-//   {
-//     id: 5,
-//     title: "Model Loading and Quantization Techniques",
-//     excerpt: "Learn advanced techniques for efficiently loading and quantizing large language models.",
-//     category: "Advanced",
-//     readTime: "12 min read",
-//     date: "August 6, 2025",
-//     author: "Tech Team",
-//     image: "/placeholder.jpg",
-//     content: `
-//       <h2>Model Loading and Quantization</h2>
-      
-//       <h3>Downloading Your Model</h3>
-//       <p>We'll use Mistral-7B as our example model. Run the following commands in the WSL terminal:</p>
-//       <pre><code>git lfs install
-// git clone https://huggingface.co/mistralai/Mistral-7B-v0.1</code></pre>
-      
-//       <h3>Efficient Model Loading</h3>
-//       <p>Here's a sample code snippet demonstrating efficient model loading with quantization:</p>
-      
-//       <pre><code>def load_model(model_path="Mistral-7b-v0.1/"):
-//     nf4_config = BitsAndBytesConfig(
-//         load_in_4bit=True,
-//         bnb_4bit_quant_type="nf4",
-//         bnb_4bit_compute_dtype=torch.bfloat16
-//     )
+    {
+      id: 'ai-chatbots',
+      title: 'Building Intelligent AI Chatbots: A Complete Guide for 2026',
+      excerpt: 'Discover how AI-powered chatbots are revolutionizing customer service and learn the best practices for implementing them in your business.',
+      date: 'January 5, 2026',
+      readTime: '8 min read',
+      author: 'XTEN Technologies Team',
+      category: 'AI & Automation',
+      image: '/AIONE-1.png'
+    },
+    {
+      id: 'blockchain-future',
+      title: 'The Future of Blockchain: Beyond Cryptocurrency',
+      excerpt: 'Explore how blockchain technology is transforming industries beyond crypto, from supply chain to healthcare and digital identity.',
+      date: 'January 3, 2026',
+      readTime: '10 min read',
+      author: 'XTEN Technologies Team',
+      category: 'Blockchain Development',
+      image: '/BIONE-1.png'
+    },
+    {
+      id: 'ai-automation',
+      title: 'Why Your Business Needs AI-Powered Automation in 2026 (And How to Get It Right)',
+      excerpt: 'In today\'s fast-evolving digital landscape, businesses that leverage AI aren\'t just staying competitive—they\'re redefining entire industries. Discover why AI-powered automation should be at the core of your 2026 strategy.',
+      date: 'January 1, 2026',
+      readTime: '7 min read',
+      author: 'XTEN Technologies Team',
+      category: 'AI & Automation',
+      image: '/BTWO-2.png'
+    }
+  ];
 
-//     tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)
-//     model = AutoModelForCausalLM.from_pretrained(
-//         model_path,
-//         local_files_only=True,
-//         device_map="auto",
-//         quantization_config=nf4_config
-//     )
+  const BlogHome = () => (
+    <div className="min-h-screen bg-transparent text-white">
+      <Starfield/>
 
-//     return model, tokenizer</code></pre>
-      
-//       <h3>Quantization Benefits</h3>
-//       <ul>
-//         <li>Reduced memory usage</li>
-//         <li>Faster inference times</li>
-//         <li>Ability to run larger models on consumer hardware</li>
-//         <li>Minimal impact on model quality</li>
-//       </ul>
-//     `
-//   },
-//   {
-//     id: 6,
-//     title: "Building FastAPI Endpoints for LLM Inference",
-//     excerpt: "Create production-ready API endpoints to serve your locally hosted language models.",
-//     category: "API Development",
-//     readTime: "8 min read",
-//     date: "August 5, 2025",
-//     author: "Tech Team",
-//     image: "/placeholder.jpg",
-//     content: `
-//       <h2>Building a FastAPI Endpoint</h2>
-      
-//       <h3>Creating Your API</h3>
-//       <p>Create a simple prediction endpoint that serves your model:</p>
-      
-//       <pre><code>from fastapi import FastAPI
-// import transformers
-// from transformers import AutoTokenizer, AutoModelForCausalLM
-// from transformers import BitsAndBytesConfig
+      <div className="max-w-7xl mx-auto px-6 py-16 pt-[160px]">
+        <div className="mb-12">
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            Latest Insights
+          </h1>
+          <p className="text-gray-400 text-lg">
+            Explore cutting-edge technology trends and insights from the XTEN team
+          </p>
+        </div>
 
-// app = FastAPI()
-
-// @app.get("/predict")
-// async def make_prediction(query: str):
-//     prediction = predict(model, tokenizer, query)
-//     return {"prediction": prediction}</code></pre>
-      
-//       <h3>Complete Implementation</h3>
-//       <pre><code>def load_model(model_path="Mistral-7b-v0.1/"):
-//     nf4_config = BitsAndBytesConfig(
-//         load_in_4bit=True,
-//         bnb_4bit_quant_type="nf4",
-//         bnb_4bit_compute_dtype=torch.bfloat16
-//     )
-
-//     tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)
-//     model = AutoModelForCausalLM.from_pretrained(
-//         model_path,
-//         local_files_only=True,
-//         device_map="auto",
-//         quantization_config=nf4_config
-//     )
-
-//     return model, tokenizer</code></pre>
-      
-//       <h3>Running Your API</h3>
-//       <p>Start your FastAPI server with:</p>
-//       <pre><code>uvicorn main:app</code></pre>
-      
-//       <p>Then open <code>http://127.0.0.1:8000/docs</code> in your browser to access the Swagger documentation and test your LLM API.</p>
-      
-//       <h3>Best Practices</h3>
-//       <ul>
-//         <li>Monitor GPU memory usage</li>
-//         <li>Use quantization techniques</li>
-//         <li>Manage your virtual environments carefully</li>
-//         <li>Keep your libraries updated</li>
-//       </ul>
-//     `
-//   }
-]
-
-export default function BlogPage() {
-  const [selectedPost, setSelectedPost] = useState<number | null>(null)
-
-  if (selectedPost !== null) {
-    const post = blogPosts.find(p => p.id === selectedPost)
-    if (!post) return null
-
-    return (
-      <main className="pt-[80px] min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
-        <Starfield />
-        <div className="container mx-auto px-6 py-12">
-          <motion.button
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            onClick={() => setSelectedPost(null)}
-            className="flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-8 transition-colors"
-          >
-            <ArrowLeft size={20} />
-            Back to Blog
-          </motion.button>
-
-          <motion.article
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="mb-8">
-              <span className="inline-block px-3 py-1 bg-blue-600 text-blue-100 rounded-full text-sm font-medium mb-4">
+        <div className="grid md:grid-cols-2 gap-8">
+          {blogPosts.map(post => (
+            <div 
+              key={post.id}
+              className="bg-transparent rounded-2xl overflow-hidden border border-blue-900/30 hover:border-cyan-500/50 transition-all duration-300 cursor-pointer group"
+              onClick={() => setCurrentPage(post.id)}
+            >
+              <div className="w-full aspect-video relative overflow-hidden">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all" />
+              </div>
+              <div className="p-6">
+                <div className="flex items-center gap-4 text-sm text-gray-400 mb-3">
+                  <span className="px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full text-xs font-medium">
                 {post.category}
               </span>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                {post.title}
-              </h1>
-              <div className="flex flex-wrap items-center gap-6 text-gray-400 text-sm">
-                <div className="flex items-center gap-2">
-                  <User size={16} />
-                  {post.author}
-                </div>
-                <div className="flex items-center gap-2">
-                  <Calendar size={16} />
+                  <span className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
                   {post.date}
+                  </span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Clock size={16} />
+                <h2 className="text-2xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">
+                  {post.title}
+                </h2>
+                <p className="text-gray-400 mb-4">
+                  {post.excerpt}
+                </p>
+                <div className="flex items-center justify-between text-sm text-gray-500">
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-4 h-4" />
                   {post.readTime}
+                  </span>
+                  <span className="text-cyan-400 group-hover:gap-2 flex items-center gap-1 transition-all">
+                    Read More →
+                  </span>
                 </div>
               </div>
             </div>
-
-            <div className="prose prose-lg prose-invert max-w-none">
-              <div 
-                dangerouslySetInnerHTML={{ __html: post.content }}
-                className="blog-content"
-              />
-            </div>
-          </motion.article>
+          ))}
         </div>
-      </main>
-    )
-  }
+            </div>
+        </div>
+  );
 
-  return (
-    <main className="pt-[80px] min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
-      <Starfield />
-      <div className="container mx-auto px-6 py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Our <span className="text-blue-400">Tech Blog</span>
+  const AIChatbotsPost = () => (
+    <div className="min-h-screen bg-transparent text-white">
+    <Starfield/>
+    
+      <article className="max-w-4xl mx-auto px-6 py-16 pt-[160px]">
+        <div className="mb-8">
+          <Link 
+            href="/blogs"
+            onClick={() => setCurrentPage('home')}
+            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back to Blog
+          </Link>
+          <span className="px-4 py-2 bg-cyan-500/10 text-cyan-400 rounded-full text-sm font-medium inline-block mb-6">
+            AI & Automation
+          </span>
+          <h1 className="text-5xl font-bold mb-6 leading-tight">
+            Building Intelligent AI Chatbots: A Complete Guide for 2026
           </h1>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
-            Insights, tutorials, and deep dives into the latest technology trends
-          </p>
-        </motion.div>
+          <div className="flex items-center gap-6 text-gray-400 text-sm border-b border-blue-900/30 pb-6">
+            <span className="flex items-center gap-2">
+              <User className="w-4 h-4" />
+              XTEN Technologies Team
+            </span>
+            <span className="flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              January 5, 2026
+            </span>
+            <span className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              8 min read
+            </span>
+          </div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
-            <motion.article
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group cursor-pointer"
-              onClick={() => setSelectedPost(post.id)}
+        <div className="h-96 relative rounded-2xl mb-12 overflow-hidden">
+          <Image
+            src="/AIONE-1.png"
+            alt="Building Intelligent AI Chatbots"
+            fill
+            className="object-contain"
+          />
+        </div>
+
+        <div className="prose prose-invert prose-lg max-w-none">
+          <p className="text-xl text-gray-300 leading-relaxed mb-8">
+            Artificial Intelligence has transformed the way businesses interact with customers. AI chatbots have evolved from simple rule-based systems to sophisticated conversational agents capable of understanding context, emotion, and intent.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400">Why AI Chatbots Matter in 2026</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            The landscape of customer service has fundamentally changed. Today's consumers expect instant responses, 24/7 availability, and personalized experiences. AI chatbots deliver on all these fronts while reducing operational costs and improving customer satisfaction.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            According to recent industry data, businesses implementing AI chatbots see up to 70% reduction in customer service costs while handling 80% of routine inquiries automatically. This frees up human agents to focus on complex issues that require empathy and creative problem-solving.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400">Key Components of Modern AI Chatbots</h2>
+          
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Natural Language Processing (NLP)</h3>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            At the core of every intelligent chatbot is robust NLP technology. Modern NLP engines can understand context, detect sentiment, and interpret user intent even when queries are ambiguous or contain grammatical errors. We leverage advanced models like GPT-4, Claude, and custom-trained transformers to ensure accurate comprehension.
+          </p>
+
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Machine Learning Models</h3>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Machine learning allows chatbots to continuously improve from interactions. By analyzing conversation patterns, successful resolutions, and user feedback, ML models adapt and become more effective over time. This creates a self-improving system that gets smarter with every interaction.
+          </p>
+
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Integration Capabilities</h3>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            A chatbot's true power lies in its ability to integrate with existing systems. Whether it's CRM platforms, databases, payment gateways, or analytics tools, seamless integration ensures chatbots can perform actions, retrieve information, and provide comprehensive assistance.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400">Implementation Best Practices</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Successful chatbot implementation requires careful planning and execution. Start by identifying specific use cases and pain points in your customer journey. Map out conversation flows, prepare comprehensive training data, and establish clear escalation paths to human agents.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Testing is crucial. Before full deployment, conduct extensive testing with diverse user groups to identify edge cases and refine responses. Monitor key metrics like resolution rate, user satisfaction, and conversation drop-off points to continuously optimize performance.
+          </p>
+
+          <div className="bg-transparent border border-cyan-500/30 rounded-xl p-8 my-12">
+            <h3 className="text-2xl font-semibold mb-4 text-cyan-400">Ready to Build Your AI Chatbot?</h3>
+            <p className="text-gray-300 mb-6">
+              At XTEN Technologies, we specialize in creating custom AI chatbot solutions tailored to your business needs. Our team has delivered intelligent conversational agents across industries including e-commerce, healthcare, finance, and customer support.
+            </p>
+            <Link 
+              href="/#contact"
+              className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-6 py-3 rounded-lg font-semibold transition-all"
             >
-              <div className="bg-gray-800 rounded-xl overflow-hidden hover:bg-gray-750 transition-all duration-300 border border-gray-700 hover:border-gray-600">
-                <div className="aspect-video bg-gradient-to-br from-blue-600 to-purple-600 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-xs font-medium rounded-full">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <h2 className="text-xl font-bold mb-3 group-hover:text-blue-400 transition-colors line-clamp-2">
-                    {post.title}
-                  </h2>
-                  
-                  <p className="text-gray-400 mb-4 line-clamp-3">
-                    {post.excerpt}
-                  </p>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4 text-gray-500 text-sm">
-                      <div className="flex items-center gap-1">
-                        <Calendar size={14} />
-                        {post.date}
+              Get Started Today
+            </Link>
+          </div>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400">The Future is Conversational</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            As AI technology continues to advance, chatbots will become even more sophisticated. We're already seeing developments in emotional intelligence, multi-modal interactions combining text, voice, and visual elements, and predictive capabilities that anticipate user needs before they're explicitly stated.
+          </p>
+          <p className="text-gray-300 leading-relaxed">
+            The question is no longer whether to implement AI chatbots, but how quickly you can leverage this technology to stay competitive. The businesses that embrace conversational AI today will be the leaders of tomorrow.
+          </p>
+        </div>
+      </article>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <Clock size={14} />
-                        {post.readTime}
+  );
+
+  const BlockchainPost = () => (
+    <div className="min-h-screen bg-transparent text-white">
+          <Starfield/>
+
+
+      <article className="max-w-4xl mx-auto px-6 py-16 pt-[160px]">
+        <div className="mb-8">
+          <Link 
+            href="/blogs"
+            onClick={() => setCurrentPage('home')}
+            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back to Blog
+          </Link>
+          <span className="px-4 py-2 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium inline-block mb-6">
+            Blockchain Development
+          </span>
+          <h1 className="text-5xl font-bold mb-6 leading-tight">
+            The Future of Blockchain: Beyond Cryptocurrency
+          </h1>
+          <div className="flex items-center gap-6 text-gray-400 text-sm border-b border-blue-900/30 pb-6">
+            <span className="flex items-center gap-2">
+              <User className="w-4 h-4" />
+              XTEN Technologies Team
+            </span>
+            <span className="flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              January 3, 2026
+            </span>
+            <span className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              10 min read
+            </span>
                       </div>
                     </div>
                     
-                    <ChevronRight 
-                      size={20} 
-                      className="text-gray-400 group-hover:text-blue-400 group-hover:translate-x-1 transition-all"
+        <div className="h-96 relative rounded-2xl mb-12 overflow-hidden">
+          <Image
+            src="/BTWO-1.png"
+            alt="The Future of Blockchain"
+            fill
+            className="object-contain"
                     />
                   </div>
-                </div>
-              </div>
-            </motion.article>
-          ))}
+
+        <div className="prose prose-invert prose-lg max-w-none">
+          <p className="text-xl text-gray-300 leading-relaxed mb-8">
+            While cryptocurrency put blockchain on the map, the technology's potential extends far beyond digital currencies. In 2026, we're witnessing blockchain revolutionize industries from supply chain management to healthcare, creating transparent, secure, and efficient systems that were previously impossible.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Understanding Blockchain's Core Value</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Blockchain technology provides three fundamental benefits that make it invaluable across industries: immutability, transparency, and decentralization. These characteristics create trust in digital interactions without requiring intermediaries, reducing costs and increasing efficiency.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            The distributed ledger ensures that once data is recorded, it cannot be altered retroactively. This creates an auditable trail of transactions or events that all parties can verify independently. Combined with smart contracts, blockchain enables automated execution of agreements when predefined conditions are met.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Real-World Applications Beyond Crypto</h2>
           
-        </div>
-        {
-            blogPosts.length ===0 &&(
-              <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center "
-        >
-          <h1 className="text-gray-400 text-xl md:text-2xl max-w-2xl mx-auto">
-            No <span className="text-blue-400">Blog for now!</span>
-          </h1>
-          
-        </motion.div>
-            )
-          }
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Supply Chain Transparency</h3>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Global supply chains are incredibly complex, involving multiple parties across different countries. Blockchain provides end-to-end visibility, allowing companies to track products from manufacture to delivery. This is particularly valuable in industries like pharmaceuticals where counterfeit products pose serious health risks, or in food safety where tracing contamination sources quickly can save lives.
+          </p>
+
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Healthcare Records Management</h3>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Patient data is scattered across multiple healthcare providers, making comprehensive care difficult. Blockchain-based health records give patients control over their data while ensuring doctors have access to complete medical histories. This improves diagnosis accuracy, prevents dangerous drug interactions, and streamlines healthcare delivery while maintaining privacy through cryptographic protection.
+          </p>
+
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Digital Identity Verification</h3>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Identity theft and fraud cost billions annually. Blockchain-based digital identities provide secure, portable credentials that individuals control. Users can prove their identity without exposing sensitive information, sharing only the specific attributes required for each transaction. This is transforming everything from airport security to financial services onboarding.
+          </p>
+
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Smart Contract Automation</h3>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Smart contracts are self-executing agreements with terms directly written into code. They automatically enforce and execute contract terms when conditions are met, eliminating the need for intermediaries. This is revolutionizing industries like real estate, insurance claims processing, and royalty distribution in creative industries.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Implementing Blockchain Solutions</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Successful blockchain implementation starts with identifying specific problems that blockchain solves better than traditional solutions. Not every application needs blockchain—it's most valuable when multiple parties need to share data, trust is difficult to establish, or intermediaries create friction and cost.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Choose the right blockchain platform for your needs. Public blockchains like Ethereum offer maximum decentralization but can be slower and more expensive. Private or consortium blockchains provide faster transactions and better privacy but with reduced decentralization. Hybrid approaches often provide the best balance.
+          </p>
+
+          <div className="bg-transparent border border-purple-500/30 rounded-xl p-8 my-12">
+            <h3 className="text-2xl font-semibold mb-4 text-purple-400">Building Blockchain Solutions</h3>
+            <p className="text-gray-300 mb-6">
+              XTEN Technologies has extensive experience developing blockchain solutions across Ethereum, Polygon, and other major networks. We've built smart contracts, NFT platforms, tokenomics systems, and decentralized applications that solve real business challenges.
+            </p>
+            <Link 
+              href="/#contact"
+              className="inline-block bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-400 hover:to-blue-500 px-6 py-3 rounded-lg font-semibold transition-all"
+            >
+              Discuss Your Project
+            </Link>
       </div>
       
-      <style jsx>{`
-        .blog-content h2 {
-          font-size: 1.875rem;
-          font-weight: 700;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
-          color: #e5e7eb;
-        }
-        
-        .blog-content h3 {
-          font-size: 1.5rem;
-          font-weight: 600;
-          margin-top: 1.5rem;
-          margin-bottom: 0.75rem;
-          color: #d1d5db;
-        }
-        
-        .blog-content h4 {
-          font-size: 1.25rem;
-          font-weight: 600;
-          margin-top: 1rem;
-          margin-bottom: 0.5rem;
-          color: #d1d5db;
-        }
-        
-        .blog-content p {
-          margin-bottom: 1rem;
-          line-height: 1.7;
-          color: #9ca3af;
-        }
-        
-        .blog-content ul, .blog-content ol {
-          margin-bottom: 1rem;
-          padding-left: 1.5rem;
-          color: #9ca3af;
-        }
-        
-        .blog-content li {
-          margin-bottom: 0.5rem;
-          line-height: 1.6;
-        }
-        
-        .blog-content pre {
-          background: #1f2937;
-          border: 1px solid #374151;
-          border-radius: 0.5rem;
-          padding: 1rem;
-          overflow-x: auto;
-          margin: 1.5rem 0;
-        }
-        
-        .blog-content code {
-          background: #1f2937;
-          color: #60a5fa;
-          padding: 0.125rem 0.25rem;
-          border-radius: 0.25rem;
-          font-size: 0.875rem;
-        }
-        
-        .blog-content pre code {
-          background: transparent;
-          padding: 0;
-          color: #e5e7eb;
-        }
-        
-        .blog-content strong {
-          color: #f3f4f6;
-          font-weight: 600;
-        }
-        
-        .line-clamp-2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        
-        .line-clamp-3 {
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-      `}</style>
-    </main>
-  )
-}
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Challenges and Considerations</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            While blockchain offers tremendous potential, it's not without challenges. Scalability remains a concern for public blockchains, though layer-2 solutions are addressing this. Energy consumption, particularly for proof-of-work systems, is another consideration, driving adoption of more efficient consensus mechanisms like proof-of-stake.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Regulatory uncertainty also poses challenges in some jurisdictions. However, as governments worldwide develop clearer frameworks for blockchain technology, this is becoming less of a barrier. Organizations should work with legal experts to ensure compliance while maintaining the benefits of blockchain.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">The Road Ahead</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            The future of blockchain is about integration with other emerging technologies. Combining blockchain with AI creates intelligent, autonomous systems with transparent decision-making. Integration with IoT enables secure device-to-device transactions. These convergences will unlock entirely new possibilities.
+          </p>
+          <p className="text-gray-300 leading-relaxed">
+            As blockchain matures, we'll see it become invisible infrastructure—powering systems in the background rather than being the headline feature. This is when blockchain will truly realize its potential, creating a more transparent, efficient, and equitable digital economy. The question for businesses isn't whether blockchain will impact their industry, but how quickly they can adapt to leverage its advantages.
+          </p>
+        </div>
+      </article>
+    </div>
+  );
+
+  const AIAutomationPost = () => (
+    <div className="min-h-screen bg-transparent text-white">
+      <Starfield/>
+
+      <article className="max-w-4xl mx-auto px-6 py-16 pt-[160px]">
+        <div className="mb-8">
+          <Link 
+            href="/blogs"
+            onClick={() => setCurrentPage('home')}
+            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back to Blog
+          </Link>
+          <span className="px-4 py-2 bg-cyan-500/10 text-cyan-400 rounded-full text-sm font-medium inline-block mb-6">
+            AI & Automation
+          </span>
+          <h1 className="text-5xl font-bold mb-6 leading-tight">
+            Why Your Business Needs AI-Powered Automation in 2026 (And How to Get It Right)
+          </h1>
+          <div className="flex items-center gap-6 text-gray-400 text-sm border-b border-blue-900/30 pb-6">
+            <span className="flex items-center gap-2">
+              <User className="w-4 h-4" />
+              XTEN Technologies Team
+            </span>
+            <span className="flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              January 1, 2026
+            </span>
+            <span className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              7 min read
+            </span>
+          </div>
+        </div>
+
+        <div className="h-96 relative rounded-2xl mb-12 overflow-hidden">
+          <Image
+            src="/BTWO-2.png"
+            alt="AI-Powered Automation"
+            fill
+            className="object-contain"
+          />
+        </div>
+
+        <div className="prose prose-invert prose-lg max-w-none">
+          <p className="text-xl text-gray-300 leading-relaxed mb-8">
+            In today's fast-evolving digital landscape, businesses that leverage artificial intelligence aren't just staying competitive—they're redefining entire industries. From predictive customer behavior models to intelligent automation pipelines, AI is no longer a luxury; it's a necessity for scalable growth.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-8">
+            At XTEN Technologies, we've helped startups and enterprises alike integrate purpose-built AI solutions that drive efficiency, reduce costs, and unlock new revenue streams. Here's why AI-powered automation should be at the core of your 2026 strategy—and how to implement it without the guesswork.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400">The Real Impact of AI in Modern Business</h2>
+          <p className="text-gray-300 leading-relaxed mb-4">
+            Consider these use cases:
+          </p>
+          <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
+            <li>Predictive analytics forecasting inventory needs with 92% accuracy</li>
+            <li>NLP-powered chatbots resolving 70% of customer queries without human intervention</li>
+            <li>Generative AI automating content creation for marketing, reducing campaign turnaround by 60%</li>
+          </ul>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            These aren't hypotheticals—they're real outcomes from our client engagements.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400">Common Pitfalls (And How to Avoid Them)</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Many companies rush into AI without a clear strategy, resulting in wasted resources. The key? Start with business outcomes, not technology. Ask:
+          </p>
+          <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
+            <li>What manual processes drain your team's time?</li>
+            <li>Where could real-time insights change decision-making?</li>
+            <li>Which customer touchpoints could be personalized at scale?</li>
+          </ul>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400">How XTEN Builds Tailored AI Solutions</h2>
+          <p className="text-gray-300 leading-relaxed mb-4">
+            We don't offer off-the-shelf AI. Instead, we:
+          </p>
+          <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
+            <li>Conduct deep discovery sessions to align AI with your KPIs</li>
+            <li>Develop custom machine learning models trained on your data</li>
+            <li>Integrate NLP, generative AI, or predictive systems into your existing stack</li>
+            <li>Ensure ethical, explainable, and maintainable AI workflows</li>
+          </ul>
+
+          <div className="bg-transparent border border-cyan-500/30 rounded-xl p-8 my-12">
+            <h3 className="text-2xl font-semibold mb-4 text-cyan-400">Ready to Automate with Intelligence?</h3>
+            <p className="text-gray-300 mb-6">
+              AI isn't about replacing humans—it's about empowering them. If you're ready to transform operations, enhance customer experience, and future-proof your business, start your project with XTEN today.
+            </p>
+            <Link 
+              href="/#contact"
+              className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-6 py-3 rounded-lg font-semibold transition-all"
+            >
+              Get Started Today
+            </Link>
+          </div>
+        </div>
+      </article>
+    </div>
+  );
+
+  return (
+    <div>
+      {currentPage === 'home' && <BlogHome />}
+      {currentPage === 'ai-chatbots' && <AIChatbotsPost />}
+      {currentPage === 'blockchain-future' && <BlockchainPost />}
+      {currentPage === 'ai-automation' && <AIAutomationPost />}
+    </div>
+  );
+};
+
+export default XTENBlogPages;
