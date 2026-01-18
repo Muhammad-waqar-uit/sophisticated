@@ -11,16 +11,18 @@ export default function Starfield() {
   useEffect(() => {
     if (!mountRef.current) return
 
+    const mobileCheck = window.innerWidth < 768
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    const renderer = new THREE.WebGLRenderer({ antialias: !mobileCheck, alpha: true })
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(window.devicePixelRatio)
+    // Limit pixel ratio on mobile for better performance
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobileCheck ? 1.5 : 2))
     mountRef.current.appendChild(renderer.domElement)
 
-    // Starfield
+    // Starfield - reduce count on mobile for better performance
     const starsGeometry = new THREE.BufferGeometry()
-    const starsCount = 10000
+    const starsCount = mobileCheck ? 3000 : 10000
     const positions = new Float32Array(starsCount * 3)
     for (let i = 0; i < starsCount; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 2000
@@ -54,9 +56,11 @@ export default function Starfield() {
     animate()
 
     const handleResize = () => {
+      const isMobileNow = window.innerWidth < 768
       camera.aspect = window.innerWidth / window.innerHeight
       camera.updateProjectionMatrix()
       renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobileNow ? 1.5 : 2))
     }
     window.addEventListener("resize", handleResize)
 

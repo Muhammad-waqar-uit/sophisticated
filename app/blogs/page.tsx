@@ -4,7 +4,13 @@ import React, { useState } from 'react';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Starfield from "@/components/Starfield"
+import dynamic from 'next/dynamic';
+
+// Lazy load Starfield component to improve initial page load
+const Starfield = dynamic(() => import("@/components/Starfield"), {
+  ssr: false,
+  loading: () => null
+});
 
 const XTENBlogPages = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -88,6 +94,9 @@ const blogPosts = [
                   src={post.image}
                   alt={post.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  loading={blogPosts.indexOf(post) < 2 ? "eager" : "lazy"}
+                  priority={blogPosts.indexOf(post) < 2}
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all" />
@@ -166,6 +175,8 @@ const blogPosts = [
             src="/AIONE-1.png"
             alt="Building Intelligent AI Chatbots"
             fill
+            sizes="(max-width: 768px) 100vw, 896px"
+            loading="lazy"
             className="object-contain"
           />
         </div>
@@ -275,6 +286,8 @@ const blogPosts = [
             src="/BTWO-1.png"
             alt="The Future of Blockchain"
             fill
+            sizes="(max-width: 768px) 100vw, 896px"
+            loading="lazy"
             className="object-contain"
                     />
                   </div>
@@ -396,6 +409,8 @@ const blogPosts = [
             src="/BTWO-2.png"
             alt="AI-Powered Automation"
             fill
+            sizes="(max-width: 768px) 100vw, 896px"
+            loading="lazy"
             className="object-contain"
           />
         </div>
@@ -500,6 +515,8 @@ const blogPosts = [
             src="/PI-1.png"
             alt="Modern Web Development with Next.js"
             fill
+            sizes="(max-width: 768px) 100vw, 896px"
+            loading="lazy"
             className="object-contain"
           />
         </div>
@@ -626,9 +643,11 @@ const blogPosts = [
 
         <div className="h-96 relative rounded-2xl mb-12 overflow-hidden">
           <Image
-            src="/MB-1.png"
+            src="/MBB-1.png"
             alt="Cross-Platform Mobile App Development"
             fill
+            sizes="(max-width: 768px) 100vw, 896px"
+            loading="lazy"
             className="object-contain"
           />
         </div>

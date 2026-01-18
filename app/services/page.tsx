@@ -2,7 +2,13 @@
 
 import { motion } from "framer-motion"
 import Services from "@/components/Services"
-import Starfield from "@/components/Starfield"
+import dynamic from "next/dynamic"
+
+// Lazy load Starfield component to improve initial page load
+const Starfield = dynamic(() => import("@/components/Starfield"), {
+  ssr: false,
+  loading: () => null
+})
 
 export default function ServicesPage() {
   return (
