@@ -39,6 +39,26 @@ const blogPosts = [
       author: 'XTEN Technologies Team',
       category: 'AI & Automation',
       image: '/BTWO-2.png'
+    },
+    {
+      id: 'modern-web-development',
+      title: 'Modern Web Development with Next.js: Building Scalable Applications in 2026',
+      excerpt: 'Discover how Next.js is revolutionizing web development with server-side rendering, static site generation, and seamless React integration for building high-performance, scalable web applications.',
+      date: 'January 18, 2026',
+      readTime: '9 min read',
+      author: 'XTEN Technologies Team',
+      category: 'Web Development',
+      image: '/PII-1.png'
+    },
+    {
+      id: 'mobile-app-development',
+      title: 'Cross-Platform Mobile App Development: Flutter vs React Native in 2026',
+      excerpt: 'Explore the latest trends in mobile app development and learn when to choose Flutter or React Native for your next cross-platform mobile application project.',
+      date: 'January 17, 2026',
+      readTime: '8 min read',
+      author: 'XTEN Technologies Team',
+      category: 'Mobile Development',
+      image: '/MBB-1.png'
     }
   ];
 
@@ -439,12 +459,308 @@ const blogPosts = [
     </div>
   );
 
+  const ModernWebDevelopmentPost = () => (
+    <div className="min-h-screen bg-transparent text-white">
+      <Starfield/>
+
+      <article className="max-w-4xl mx-auto px-6 py-16 pt-[160px]">
+        <div className="mb-8">
+          <Link 
+            href="/blogs"
+            onClick={() => setCurrentPage('home')}
+            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back to Blog
+          </Link>
+          <span className="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium inline-block mb-6">
+            Web Development
+          </span>
+          <h1 className="text-5xl font-bold mb-6 leading-tight">
+            Modern Web Development with Next.js: Building Scalable Applications in 2026
+          </h1>
+          <div className="flex items-center gap-6 text-gray-400 text-sm border-b border-blue-900/30 pb-6">
+            <span className="flex items-center gap-2">
+              <User className="w-4 h-4" />
+              XTEN Technologies Team
+            </span>
+            <span className="flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              January 18, 2026
+            </span>
+            <span className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              9 min read
+            </span>
+          </div>
+        </div>
+
+        <div className="h-96 relative rounded-2xl mb-12 overflow-hidden">
+          <Image
+            src="/PI-1.png"
+            alt="Modern Web Development with Next.js"
+            fill
+            className="object-contain"
+          />
+        </div>
+
+        <div className="prose prose-invert prose-lg max-w-none">
+          <p className="text-xl text-gray-300 leading-relaxed mb-8">
+            The web development landscape has evolved dramatically over the past few years. Modern applications demand exceptional performance, SEO optimization, and seamless user experiences. Next.js has emerged as the framework of choice for building production-ready web applications that meet these requirements and scale effortlessly.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-8">
+            At XTEN Technologies, we've built dozens of high-traffic web applications using Next.js, witnessing firsthand how it transforms development workflows and application performance. Here's why Next.js should be your framework of choice in 2026.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-blue-400">Why Next.js Dominates Modern Web Development</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Next.js combines the best of React with powerful server-side capabilities, creating a hybrid framework that delivers optimal performance through multiple rendering strategies. Unlike traditional single-page applications, Next.js offers server-side rendering (SSR), static site generation (SSG), and incremental static regeneration (ISR), giving developers the flexibility to choose the best approach for each page.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            The framework's built-in optimizations—from automatic code splitting to image optimization—ensure your applications load quickly and perform smoothly. With Next.js 14 and beyond, features like React Server Components enable even more efficient rendering by moving component logic to the server when appropriate, reducing JavaScript bundle sizes and improving initial load times.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-blue-400">Key Features That Set Next.js Apart</h2>
+          
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Server-Side Rendering (SSR) & Static Generation</h3>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Next.js's hybrid rendering approach allows you to pre-render pages at build time or render them on-demand at request time. Static generation is perfect for content that doesn't change frequently, providing instant page loads and excellent SEO. Server-side rendering shines for dynamic content that needs to be fresh, such as user dashboards or personalized experiences.
+          </p>
+
+          <h3 className="text-2xl font-semibold mt-8 mb-4">App Router & React Server Components</h3>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            The new App Router in Next.js 13+ introduces a file-system-based routing system that simplifies navigation and layout composition. React Server Components take this further by allowing you to write components that run on the server, reducing client-side JavaScript and improving performance. This architecture enables streaming HTML, progressive enhancement, and better data fetching patterns.
+          </p>
+
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Built-in API Routes</h3>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Next.js allows you to build API endpoints directly within your application using the API Routes feature. This eliminates the need for a separate backend server for simple operations, reducing complexity and deployment overhead. API routes are perfect for handling form submissions, authentication callbacks, webhook endpoints, and database operations.
+          </p>
+
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Automatic Code Splitting & Optimization</h3>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Next.js automatically splits your code into smaller chunks, loading only what's needed for each page. The framework also optimizes images, fonts, and scripts out of the box, ensuring your application remains fast even as it grows. These optimizations are configured automatically, requiring minimal developer intervention.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-blue-400">Best Practices for Next.js Development</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            To maximize the benefits of Next.js, follow these proven practices:
+          </p>
+          <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
+            <li>Use Static Generation for pages that can be pre-rendered at build time</li>
+            <li>Implement Incremental Static Regeneration for content that updates periodically</li>
+            <li>Leverage Server Components for data fetching to reduce client-side JavaScript</li>
+            <li>Optimize images using Next.js Image component for automatic lazy loading and responsive images</li>
+            <li>Structure your application with clear separation between server and client components</li>
+            <li>Implement proper error boundaries and loading states for better user experience</li>
+          </ul>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-blue-400">Scaling with Next.js</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Next.js applications scale exceptionally well, handling everything from small business websites to enterprise-level applications serving millions of users. The framework's ability to generate static pages at build time means you can serve thousands of pages with minimal server resources. For dynamic content, edge computing and serverless functions enable global distribution with low latency.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            When deploying Next.js applications, platforms like Vercel (the creators of Next.js) provide seamless integration with zero-configuration deployments. However, Next.js applications can run on any Node.js server or be exported as static files for CDN hosting, giving you deployment flexibility.
+          </p>
+
+          <div className="bg-transparent border border-blue-500/30 rounded-xl p-8 my-12">
+            <h3 className="text-2xl font-semibold mb-4 text-blue-400">Ready to Build Your Next Web Application?</h3>
+            <p className="text-gray-300 mb-6">
+              At XTEN Technologies, we specialize in building high-performance web applications using Next.js, React, and modern development practices. Our team has delivered scalable solutions for e-commerce platforms, SaaS applications, content management systems, and enterprise web portals.
+            </p>
+            <Link 
+              href="/#contact"
+              className="inline-block bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-400 hover:to-cyan-500 px-6 py-3 rounded-lg font-semibold transition-all"
+            >
+              Start Your Project
+            </Link>
+          </div>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-blue-400">The Future of Web Development</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            As web technologies continue to evolve, Next.js remains at the forefront by incorporating the latest React features and web standards. The framework's commitment to performance, developer experience, and production readiness makes it an excellent investment for any web development project.
+          </p>
+          <p className="text-gray-300 leading-relaxed">
+            Whether you're building a marketing website, a complex web application, or an e-commerce platform, Next.js provides the tools and capabilities needed to create exceptional digital experiences. The combination of developer-friendly features and enterprise-grade performance makes it the framework of choice for modern web development in 2026 and beyond.
+          </p>
+        </div>
+      </article>
+    </div>
+  );
+
+  const MobileAppDevelopmentPost = () => (
+    <div className="min-h-screen bg-transparent text-white">
+      <Starfield/>
+
+      <article className="max-w-4xl mx-auto px-6 py-16 pt-[160px]">
+        <div className="mb-8">
+          <Link 
+            href="/blogs"
+            onClick={() => setCurrentPage('home')}
+            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back to Blog
+          </Link>
+          <span className="px-4 py-2 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium inline-block mb-6">
+            Mobile Development
+          </span>
+          <h1 className="text-5xl font-bold mb-6 leading-tight">
+            Cross-Platform Mobile App Development: Flutter vs React Native in 2026
+          </h1>
+          <div className="flex items-center gap-6 text-gray-400 text-sm border-b border-blue-900/30 pb-6">
+            <span className="flex items-center gap-2">
+              <User className="w-4 h-4" />
+              XTEN Technologies Team
+            </span>
+            <span className="flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              January 17, 2026
+            </span>
+            <span className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              8 min read
+            </span>
+          </div>
+        </div>
+
+        <div className="h-96 relative rounded-2xl mb-12 overflow-hidden">
+          <Image
+            src="/MB-1.png"
+            alt="Cross-Platform Mobile App Development"
+            fill
+            className="object-contain"
+          />
+        </div>
+
+        <div className="prose prose-invert prose-lg max-w-none">
+          <p className="text-xl text-gray-300 leading-relaxed mb-8">
+            The mobile app development landscape in 2026 is dominated by cross-platform frameworks that allow businesses to reach iOS and Android users with a single codebase. Two frameworks stand out: Flutter and React Native. Both offer compelling advantages, but choosing the right one depends on your project requirements, team expertise, and long-term goals.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-8">
+            At XTEN Technologies, we've built mobile applications using both frameworks, each serving different project needs. This comprehensive comparison will help you make an informed decision for your next mobile app development project.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Understanding Cross-Platform Development</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Cross-platform development emerged as a solution to the challenge of maintaining separate codebases for iOS and Android. Traditional native development requires different programming languages (Swift/Kotlin), development tools, and teams, significantly increasing costs and time-to-market. Cross-platform frameworks bridge this gap by allowing developers to write code once and deploy it to multiple platforms.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            The trade-off involves performance considerations, access to platform-specific features, and development ecosystem maturity. However, modern cross-platform frameworks like Flutter and React Native have narrowed these gaps substantially, making them viable options for most mobile applications.
+          </p>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Flutter: Google's UI Toolkit</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Flutter uses Dart programming language and compiles to native code, providing near-native performance. It uses its own rendering engine to draw widgets directly on the canvas, resulting in consistent UI across platforms and excellent performance.
+          </p>
+
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Flutter Advantages</h3>
+          <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
+            <li><strong>Performance:</strong> Compiles to native ARM code, delivering 60fps animations and smooth scrolling</li>
+            <li><strong>Single Codebase:</strong> Write once, run on iOS, Android, web, and desktop platforms</li>
+            <li><strong>Hot Reload:</strong> See changes instantly without losing app state, dramatically speeding up development</li>
+            <li><strong>Consistent UI:</strong> Pixel-perfect designs that look identical across all platforms</li>
+            <li><strong>Rich Widgets:</strong> Extensive built-in widget library with Material Design and Cupertino components</li>
+            <li><strong>Growing Ecosystem:</strong> Strong package ecosystem and active community support</li>
+          </ul>
+
+          <h3 className="text-2xl font-semibold mt-8 mb-4">Flutter Considerations</h3>
+          <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
+            <li>Dart language has a smaller developer community compared to JavaScript</li>
+            <li>Larger app bundle sizes compared to native apps</li>
+            <li>Some platform-specific features may require native code integration</li>
+          </ul>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">React Native: Facebook's Framework</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            React Native uses JavaScript (or TypeScript) and leverages native components, providing a bridge between JavaScript code and native UI elements. This approach allows developers to use React's declarative programming model while accessing native functionality.
+          </p>
+
+          <h3 className="text-2xl font-semibold mt-8 mb-4">React Native Advantages</h3>
+          <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
+            <li><strong>JavaScript Ecosystem:</strong> Leverages the massive JavaScript/React ecosystem and developer pool</li>
+            <li><strong>Code Reusability:</strong> Share code between web and mobile applications</li>
+            <li><strong>Native Components:</strong> Uses actual native UI components, providing platform-specific look and feel</li>
+            <li><strong>Fast Refresh:</strong> Instant feedback during development similar to Flutter's Hot Reload</li>
+            <li><strong>Mature Ecosystem:</strong> Extensive third-party libraries and community support</li>
+            <li><strong>Industry Adoption:</strong> Used by major companies like Facebook, Instagram, and Airbnb</li>
+          </ul>
+
+          <h3 className="text-2xl font-semibold mt-8 mb-4">React Native Considerations</h3>
+          <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
+            <li>Performance can lag behind Flutter for complex animations and heavy computations</li>
+            <li>Platform-specific styling may be needed for pixel-perfect designs</li>
+            <li>JavaScript bridge can introduce occasional performance bottlenecks</li>
+          </ul>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">When to Choose Flutter</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Choose Flutter when:
+          </p>
+          <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
+            <li>Your app requires complex animations and custom UI designs</li>
+            <li>Performance is critical, especially for games or media-heavy applications</li>
+            <li>You need consistent UI across platforms without platform-specific variations</li>
+            <li>Your team is comfortable learning Dart or starting fresh</li>
+            <li>You're building for multiple platforms (mobile, web, desktop) with one codebase</li>
+          </ul>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">When to Choose React Native</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Choose React Native when:
+          </p>
+          <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
+            <li>Your team already has React/JavaScript expertise</li>
+            <li>You need to share code between web and mobile applications</li>
+            <li>You want to leverage the extensive JavaScript ecosystem</li>
+            <li>Platform-specific native look and feel is important</li>
+            <li>You're building apps that rely heavily on existing JavaScript libraries</li>
+          </ul>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Making the Right Choice for Your Project</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Both Flutter and React Native are excellent choices for cross-platform mobile development. The decision should be based on:
+          </p>
+          <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
+            <li><strong>Team Expertise:</strong> Choose the framework your team can be productive with fastest</li>
+            <li><strong>Project Requirements:</strong> Consider performance needs, UI complexity, and platform features required</li>
+            <li><strong>Long-term Maintenance:</strong> Evaluate ecosystem stability and community support</li>
+            <li><strong>Business Goals:</strong> Align framework choice with your timeline, budget, and scalability needs</li>
+          </ul>
+
+          <div className="bg-transparent border border-purple-500/30 rounded-xl p-8 my-12">
+            <h3 className="text-2xl font-semibold mb-4 text-purple-400">Need Help Choosing or Building Your Mobile App?</h3>
+            <p className="text-gray-300 mb-6">
+              XTEN Technologies has extensive experience developing cross-platform mobile applications with both Flutter and React Native. We help clients choose the right framework based on their specific needs and build scalable, performant mobile applications that deliver exceptional user experiences.
+            </p>
+            <Link 
+              href="/#contact"
+              className="inline-block bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-400 hover:to-blue-500 px-6 py-3 rounded-lg font-semibold transition-all"
+            >
+              Discuss Your Mobile App Project
+            </Link>
+          </div>
+
+          <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">The Future of Cross-Platform Development</h2>
+          <p className="text-gray-300 leading-relaxed mb-6">
+            Both Flutter and React Native continue to evolve rapidly. Flutter is expanding its web and desktop capabilities, while React Native is improving performance with new architecture and better native module integration. The gap between native and cross-platform development continues to narrow, making these frameworks increasingly viable for enterprise applications.
+          </p>
+          <p className="text-gray-300 leading-relaxed">
+            Regardless of which framework you choose, the key to successful mobile app development lies in understanding your users, designing exceptional experiences, and building maintainable, scalable applications. Both Flutter and React Native provide the tools to achieve these goals, and the right choice depends on your specific project context and requirements.
+          </p>
+        </div>
+      </article>
+    </div>
+  );
+
   return (
     <div>
       {currentPage === 'home' && <BlogHome />}
       {currentPage === 'ai-chatbots' && <AIChatbotsPost />}
       {currentPage === 'blockchain-future' && <BlockchainPost />}
       {currentPage === 'ai-automation' && <AIAutomationPost />}
+      {currentPage === 'modern-web-development' && <ModernWebDevelopmentPost />}
+      {currentPage === 'mobile-app-development' && <MobileAppDevelopmentPost />}
     </div>
   );
 };

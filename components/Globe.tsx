@@ -7,23 +7,34 @@ import { Color } from "three"
 
 export default function Globe() {
   const mountRef = useRef<HTMLDivElement>(null)
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
   const [isHighResLoaded, setIsHighResLoaded] = useState(false)
   const [showHint, setShowHint] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     if (!mountRef.current) return
 
+    // Clear any existing renderer canvas to prevent duplicates (only canvas elements, not React children)
+    if (rendererRef.current?.domElement && mountRef.current.contains(rendererRef.current.domElement)) {
+      mountRef.current.removeChild(rendererRef.current.domElement)
+    }
+
     // Create scene, camera, and renderer
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    const mobileCheck = window.innerWidth < 768
+    setIsMobile(mobileCheck)
+    const renderer = new THREE.WebGLRenderer({ antialias: !mobileCheck, alpha: true })
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(window.devicePixelRatio)
+    // Limit pixel ratio on mobile for better performance
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobileCheck ? 1.5 : 2))
     mountRef.current.appendChild(renderer.domElement)
+    rendererRef.current = renderer
 
-    // Create a starfield
+    // Create a starfield - reduce count on mobile for better performance
     const starsGeometry = new THREE.BufferGeometry()
-    const starsCount = 10000
+    const starsCount = mobileCheck ? 3000 : 10000
     const positions = new Float32Array(starsCount * 3)
     for (let i = 0; i < starsCount; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 2000
@@ -55,7 +66,7 @@ export default function Globe() {
        gl_FragColor = vec4(glowColor, 1.0) * intensity;
      }
    `
-    const atmosphereGeometry = new THREE.SphereGeometry(5.2, 32, 32)
+    const atmosphereGeometry = new THREE.SphereGeometry(5.2, mobileCheck ? 16 : 32, mobileCheck ? 16 : 32)
     const atmosphereMaterial = new THREE.ShaderMaterial({
       vertexShader: atmosphereVertexShader,
       fragmentShader: atmosphereFragmentShader,
@@ -70,7 +81,7 @@ export default function Globe() {
     scene.add(atmosphereMesh)
 
     // Create wireframe globe
-    const wireframeGeometry = new THREE.SphereGeometry(5, 32, 32)
+    const wireframeGeometry = new THREE.SphereGeometry(5, mobileCheck ? 16 : 32, mobileCheck ? 16 : 32)
     const wireframeMaterial = new THREE.MeshBasicMaterial({
       color: 0x3a86ff,
       wireframe: true,
@@ -81,7 +92,7 @@ export default function Globe() {
     scene.add(wireframeGlobe)
 
     // Create solid globe (initially invisible)
-    const solidGeometry = new THREE.SphereGeometry(4.9, 64, 64)
+    const solidGeometry = new THREE.SphereGeometry(4.9, mobileCheck ? 32 : 64, mobileCheck ? 32 : 64)
     const solidMaterial = new THREE.MeshPhongMaterial({
       color: 0x1a237e,
       transparent: true,
@@ -99,7 +110,8 @@ export default function Globe() {
     pointLight.position.set(10, 10, 10)
     scene.add(pointLight)
 
-    camera.position.z = 10
+    // Position camera further on mobile to make globe appear smaller
+    camera.position.z = mobileCheck ? 18 : 10
 
     const controls = new OrbitControls(camera, renderer.domElement)
     controls.enableDamping = true
@@ -209,9 +221,14 @@ export default function Globe() {
     })
 
     const handleResize = () => {
+      const isMobileNow = window.innerWidth < 768
+      setIsMobile(isMobileNow)
       camera.aspect = window.innerWidth / window.innerHeight
+      // Adjust camera distance based on screen size - further on mobile = smaller globe
+      camera.position.z = isMobileNow ? 18 : 10
       camera.updateProjectionMatrix()
       renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobileNow ? 1.5 : 2))
     }
     window.addEventListener("resize", handleResize)
 
@@ -222,15 +239,18 @@ export default function Globe() {
     return () => {
       window.removeEventListener("resize", handleResize)
       cancelAnimationFrame(animationId)
-      mountRef.current?.removeChild(renderer.domElement)
+      if (rendererRef.current?.domElement && mountRef.current?.contains(rendererRef.current.domElement)) {
+        mountRef.current.removeChild(rendererRef.current.domElement)
+      }
+      rendererRef.current?.dispose()
       controls.dispose()
       clearTimeout(hintTimer)
     }
   }, [])
 
   return (
-    <div ref={mountRef} className="fixed top-0 left-0 w-full h-full z-0">
-      {showHint && (
+    <div ref={mountRef} className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none md:pointer-events-auto">
+      {showHint && !isMobile && (
         <div className="absolute bottom-4 right-4 bg-black bg-opacity-30 text-white text-sm px-3 py-1 rounded-full transition-opacity duration-1000 opacity-80 hover:opacity-100">
           Drag to explore
         </div>

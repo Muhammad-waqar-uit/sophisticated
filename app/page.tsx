@@ -17,9 +17,7 @@ export default function Home() {
 
       <SmoothCursor/>
       {/* Globe Background - Fixed Position */}
-      <div className="fixed inset-0 z-0">
-        <GlobeWrapper />
-      </div>
+      <GlobeWrapper />
 
       {/* Scrollable Content */}
           {/* <TracingBeam className="px-6"> */}
