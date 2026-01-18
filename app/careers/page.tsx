@@ -131,7 +131,7 @@ export default function CareersPage() {
             Join Our Team
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-300 mb-8 leading-relaxed">
             Build the future of technology with passionate innovators
           </p>
           
@@ -147,7 +147,7 @@ export default function CareersPage() {
               </div>
               <div className="text-left">
                 <h3 className="text-xl font-bold text-white mb-2">No Open Positions Currently</h3>
-                <p className="text-gray-300 mb-4">
+                <p className="text-base md:text-lg text-gray-300 mb-4 leading-relaxed">
                   We're not actively hiring right now, but we're always interested in connecting with talented individuals. 
                   Feel free to reach out if you'd like to be considered for future opportunities.
                 </p>
@@ -178,9 +178,9 @@ export default function CareersPage() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
             Why Work With Us
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            We're building something special, and we'd love to have you be a part of it
-          </p>
+              <p className="text-base md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                We're building something special, and we'd love to have you be a part of it
+              </p>
         </motion.div>
 
         <motion.div
@@ -201,7 +201,7 @@ export default function CareersPage() {
                 <benefit.icon className="w-7 h-7 text-blue-400" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">{benefit.title}</h3>
-              <p className="text-gray-400 leading-relaxed">{benefit.description}</p>
+              <p className="text-base md:text-lg text-gray-400 leading-relaxed">{benefit.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -238,7 +238,7 @@ export default function CareersPage() {
                 <value.icon className="w-8 h-8 text-purple-400" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">{value.title}</h3>
-              <p className="text-gray-300 leading-relaxed">{value.description}</p>
+              <p className="text-base md:text-lg text-gray-300 leading-relaxed">{value.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -257,7 +257,7 @@ export default function CareersPage() {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Interested in Future Opportunities?
             </h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-base md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
               Even though we're not hiring right now, we'd love to hear from you. 
               Connect with us and we'll keep you in mind for future openings.
             </p>

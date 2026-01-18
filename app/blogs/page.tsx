@@ -1,10 +1,11 @@
 "use client"
 
 import React, { useState } from 'react';
-import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, User, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import { motion, Variants } from 'framer-motion';
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 // Lazy load Starfield component to improve initial page load
@@ -12,6 +13,41 @@ const Starfield = dynamic(() => import("@/components/Starfield"), {
   ssr: false,
   loading: () => null
 });
+
+// Animation variants
+const containerVariants: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
+
+const featuredVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+    },
+  },
+};
 
 const XTENBlogPages = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -69,71 +105,155 @@ const blogPosts = [
     }
   ];
 
-  const BlogHome = () => (
-    <div className="min-h-screen bg-transparent text-white">
-      <Starfield/>
+  const BlogHome = () => {
+    const featuredPost = blogPosts[0];
+    const otherPosts = blogPosts.slice(1);
 
-      <div className="max-w-7xl mx-auto px-6 py-16 pt-[160px]">
-        <div className="mb-12">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-            Latest Insights
-          </h1>
-          <p className="text-gray-400 text-lg">
-            Explore cutting-edge technology trends and insights from the XTEN team
-          </p>
-        </div>
+    return (
+      <div className="min-h-screen bg-transparent text-white">
+        <Starfield/>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {blogPosts.map(post => (
-            <div 
-              key={post.id}
-              className="bg-transparent rounded-2xl overflow-hidden border border-blue-900/30 hover:border-cyan-500/50 transition-all duration-300 cursor-pointer group"
-              onClick={() => setCurrentPage(post.id)}
+        <div className="max-w-7xl mx-auto px-6 py-16 pt-[160px]">
+          <motion.div
+            className="mb-16 text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Latest Insights
+            </h1>
+            <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              Explore cutting-edge technology trends and insights from the XTEN team
+            </p>
+          </motion.div>
+
+          {/* Featured Post */}
+          {featuredPost && (
+            <motion.div
+              variants={featuredVariants}
+              initial="hidden"
+              animate="show"
+              className="mb-16"
             >
-              <div className="w-full aspect-video relative overflow-hidden">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  loading={blogPosts.indexOf(post) < 2 ? "eager" : "lazy"}
-                  priority={blogPosts.indexOf(post) < 2}
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all" />
-              </div>
-              <div className="p-6">
-                <div className="flex items-center gap-4 text-sm text-gray-400 mb-3">
-                  <span className="px-3 py-1 bg-cyan-500/10 text-cyan-400 rounded-full text-xs font-medium">
-                {post.category}
-              </span>
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                  {post.date}
-                  </span>
+              <div
+                onClick={() => setCurrentPage(featuredPost.id)}
+                className="group relative bg-white/5 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all duration-500 cursor-pointer"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10">
+                  <div className="grid md:grid-cols-2 gap-0">
+                    <div className="relative h-64 md:h-auto min-h-[400px] overflow-hidden">
+                      <Image
+                        src={featuredPost.image}
+                        alt={featuredPost.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        priority
+                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/60 transition-all duration-500" />
+                      <div className="absolute top-4 left-4">
+                        <span className="px-4 py-2 bg-cyan-500/20 backdrop-blur-sm text-cyan-300 rounded-full text-sm font-semibold border border-cyan-500/30">
+                          Featured
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-8 md:p-12 flex flex-col justify-center">
+                      <div className="flex items-center gap-4 text-sm md:text-base text-gray-400 mb-4">
+                        <span className="px-3 py-1.5 bg-cyan-500/10 text-cyan-400 rounded-full text-sm font-medium">
+                          {featuredPost.category}
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          <Calendar className="w-4 h-4" />
+                          {featuredPost.date}
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          <Clock className="w-4 h-4" />
+                          {featuredPost.readTime}
+                        </span>
+                      </div>
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors duration-300 leading-tight">
+                        {featuredPost.title}
+                      </h2>
+                      <p className="text-base md:text-lg text-gray-300 mb-6 leading-relaxed line-clamp-3">
+                        {featuredPost.excerpt}
+                      </p>
+                      <div className="flex items-center gap-2 text-cyan-400 group-hover:gap-3 transition-all duration-300 font-semibold">
+                        <span>Read Article</span>
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <h2 className="text-2xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">
-                  {post.title}
-                </h2>
-                <p className="text-gray-400 mb-4">
-                  {post.excerpt}
-                </p>
-                <div className="flex items-center justify-between text-sm text-gray-500">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
-                  {post.readTime}
-                  </span>
-                  <span className="text-cyan-400 group-hover:gap-2 flex items-center gap-1 transition-all">
-                    Read More →
-                  </span>
-                </div>
               </div>
-            </div>
-          ))}
+            </motion.div>
+          )}
+
+          {/* Other Posts Grid */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="grid md:grid-cols-2 lg:grid-cols-2 gap-8"
+          >
+            {otherPosts.map((post, index) => (
+              <motion.div
+                key={post.id}
+                variants={cardVariants}
+                onClick={() => setCurrentPage(post.id)}
+                className="group relative bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all duration-300 cursor-pointer"
+                whileHover={{ y: -8, scale: 1.02 }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative z-10">
+                  <div className="w-full aspect-video relative overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      loading={index < 2 ? "eager" : "lazy"}
+                      priority={index < 1}
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/40 transition-all duration-300" />
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1.5 bg-cyan-500/20 backdrop-blur-sm text-cyan-300 rounded-full text-sm font-medium border border-cyan-500/30">
+                        {post.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 text-sm text-gray-400 mb-4">
+                      <span className="flex items-center gap-1.5">
+                        <Calendar className="w-4 h-4" />
+                        {post.date}
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <Clock className="w-4 h-4" />
+                        {post.readTime}
+                      </span>
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold mb-3 text-white group-hover:text-cyan-400 transition-colors duration-300 line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-base text-gray-400 mb-5 leading-relaxed line-clamp-3">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center gap-2 text-cyan-400 group-hover:gap-3 transition-all duration-300 text-sm font-semibold">
+                      <span>Read More</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-            </div>
-        </div>
-  );
+      </div>
+    );
+  };
 
   const AIChatbotsPost = () => (
     <div className="min-h-screen bg-transparent text-white">
@@ -183,40 +303,40 @@ const blogPosts = [
         </div>
 
         <div className="prose prose-invert prose-lg max-w-none">
-          <p className="text-xl text-gray-300 leading-relaxed mb-8">
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
             Artificial Intelligence has transformed the way businesses interact with customers. AI chatbots have evolved from simple rule-based systems to sophisticated conversational agents capable of understanding context, emotion, and intent.
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400">Why AI Chatbots Matter in 2026</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             The landscape of customer service has fundamentally changed. Today's consumers expect instant responses, 24/7 availability, and personalized experiences. AI chatbots deliver on all these fronts while reducing operational costs and improving customer satisfaction.
           </p>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             According to recent industry data, businesses implementing AI chatbots see up to 70% reduction in customer service costs while handling 80% of routine inquiries automatically. This frees up human agents to focus on complex issues that require empathy and creative problem-solving.
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400">Key Components of Modern AI Chatbots</h2>
           
           <h3 className="text-2xl font-semibold mt-8 mb-4">Natural Language Processing (NLP)</h3>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             At the core of every intelligent chatbot is robust NLP technology. Modern NLP engines can understand context, detect sentiment, and interpret user intent even when queries are ambiguous or contain grammatical errors. We leverage advanced models like GPT-4, Claude, and custom-trained transformers to ensure accurate comprehension.
           </p>
 
           <h3 className="text-2xl font-semibold mt-8 mb-4">Machine Learning Models</h3>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Machine learning allows chatbots to continuously improve from interactions. By analyzing conversation patterns, successful resolutions, and user feedback, ML models adapt and become more effective over time. This creates a self-improving system that gets smarter with every interaction.
           </p>
 
           <h3 className="text-2xl font-semibold mt-8 mb-4">Integration Capabilities</h3>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             A chatbot's true power lies in its ability to integrate with existing systems. Whether it's CRM platforms, databases, payment gateways, or analytics tools, seamless integration ensures chatbots can perform actions, retrieve information, and provide comprehensive assistance.
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400">Implementation Best Practices</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Successful chatbot implementation requires careful planning and execution. Start by identifying specific use cases and pain points in your customer journey. Map out conversation flows, prepare comprehensive training data, and establish clear escalation paths to human agents.
           </p>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Testing is crucial. Before full deployment, conduct extensive testing with diverse user groups to identify edge cases and refine responses. Monitor key metrics like resolution rate, user satisfaction, and conversation drop-off points to continuously optimize performance.
           </p>
 
@@ -234,10 +354,10 @@ const blogPosts = [
           </div>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400">The Future is Conversational</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             As AI technology continues to advance, chatbots will become even more sophisticated. We're already seeing developments in emotional intelligence, multi-modal interactions combining text, voice, and visual elements, and predictive capabilities that anticipate user needs before they're explicitly stated.
           </p>
-          <p className="text-gray-300 leading-relaxed">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed">
             The question is no longer whether to implement AI chatbots, but how quickly you can leverage this technology to stay competitive. The businesses that embrace conversational AI today will be the leaders of tomorrow.
           </p>
         </div>
@@ -294,45 +414,45 @@ const blogPosts = [
                   </div>
 
         <div className="prose prose-invert prose-lg max-w-none">
-          <p className="text-xl text-gray-300 leading-relaxed mb-8">
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
             While cryptocurrency put blockchain on the map, the technology's potential extends far beyond digital currencies. In 2026, we're witnessing blockchain revolutionize industries from supply chain management to healthcare, creating transparent, secure, and efficient systems that were previously impossible.
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Understanding Blockchain's Core Value</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Blockchain technology provides three fundamental benefits that make it invaluable across industries: immutability, transparency, and decentralization. These characteristics create trust in digital interactions without requiring intermediaries, reducing costs and increasing efficiency.
           </p>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             The distributed ledger ensures that once data is recorded, it cannot be altered retroactively. This creates an auditable trail of transactions or events that all parties can verify independently. Combined with smart contracts, blockchain enables automated execution of agreements when predefined conditions are met.
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Real-World Applications Beyond Crypto</h2>
           
           <h3 className="text-2xl font-semibold mt-8 mb-4">Supply Chain Transparency</h3>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Global supply chains are incredibly complex, involving multiple parties across different countries. Blockchain provides end-to-end visibility, allowing companies to track products from manufacture to delivery. This is particularly valuable in industries like pharmaceuticals where counterfeit products pose serious health risks, or in food safety where tracing contamination sources quickly can save lives.
           </p>
 
           <h3 className="text-2xl font-semibold mt-8 mb-4">Healthcare Records Management</h3>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Patient data is scattered across multiple healthcare providers, making comprehensive care difficult. Blockchain-based health records give patients control over their data while ensuring doctors have access to complete medical histories. This improves diagnosis accuracy, prevents dangerous drug interactions, and streamlines healthcare delivery while maintaining privacy through cryptographic protection.
           </p>
 
           <h3 className="text-2xl font-semibold mt-8 mb-4">Digital Identity Verification</h3>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Identity theft and fraud cost billions annually. Blockchain-based digital identities provide secure, portable credentials that individuals control. Users can prove their identity without exposing sensitive information, sharing only the specific attributes required for each transaction. This is transforming everything from airport security to financial services onboarding.
           </p>
 
           <h3 className="text-2xl font-semibold mt-8 mb-4">Smart Contract Automation</h3>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Smart contracts are self-executing agreements with terms directly written into code. They automatically enforce and execute contract terms when conditions are met, eliminating the need for intermediaries. This is revolutionizing industries like real estate, insurance claims processing, and royalty distribution in creative industries.
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Implementing Blockchain Solutions</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Successful blockchain implementation starts with identifying specific problems that blockchain solves better than traditional solutions. Not every application needs blockchain—it's most valuable when multiple parties need to share data, trust is difficult to establish, or intermediaries create friction and cost.
           </p>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Choose the right blockchain platform for your needs. Public blockchains like Ethereum offer maximum decentralization but can be slower and more expensive. Private or consortium blockchains provide faster transactions and better privacy but with reduced decentralization. Hybrid approaches often provide the best balance.
           </p>
 
@@ -350,18 +470,18 @@ const blogPosts = [
       </div>
       
           <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Challenges and Considerations</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             While blockchain offers tremendous potential, it's not without challenges. Scalability remains a concern for public blockchains, though layer-2 solutions are addressing this. Energy consumption, particularly for proof-of-work systems, is another consideration, driving adoption of more efficient consensus mechanisms like proof-of-stake.
           </p>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Regulatory uncertainty also poses challenges in some jurisdictions. However, as governments worldwide develop clearer frameworks for blockchain technology, this is becoming less of a barrier. Organizations should work with legal experts to ensure compliance while maintaining the benefits of blockchain.
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">The Road Ahead</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             The future of blockchain is about integration with other emerging technologies. Combining blockchain with AI creates intelligent, autonomous systems with transparent decision-making. Integration with IoT enables secure device-to-device transactions. These convergences will unlock entirely new possibilities.
           </p>
-          <p className="text-gray-300 leading-relaxed">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed">
             As blockchain matures, we'll see it become invisible infrastructure—powering systems in the background rather than being the headline feature. This is when blockchain will truly realize its potential, creating a more transparent, efficient, and equitable digital economy. The question for businesses isn't whether blockchain will impact their industry, but how quickly they can adapt to leverage its advantages.
           </p>
         </div>
@@ -417,7 +537,7 @@ const blogPosts = [
         </div>
 
         <div className="prose prose-invert prose-lg max-w-none">
-          <p className="text-xl text-gray-300 leading-relaxed mb-8">
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
             In today's fast-evolving digital landscape, businesses that leverage artificial intelligence aren't just staying competitive—they're redefining entire industries. From predictive customer behavior models to intelligent automation pipelines, AI is no longer a luxury; it's a necessity for scalable growth.
           </p>
           <p className="text-gray-300 leading-relaxed mb-8">
@@ -433,12 +553,12 @@ const blogPosts = [
             <li>NLP-powered chatbots resolving 70% of customer queries without human intervention</li>
             <li>Generative AI automating content creation for marketing, reducing campaign turnaround by 60%</li>
           </ul>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             These aren't hypotheticals—they're real outcomes from our client engagements.
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-cyan-400">Common Pitfalls (And How to Avoid Them)</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Many companies rush into AI without a clear strategy, resulting in wasted resources. The key? Start with business outcomes, not technology. Ask:
           </p>
           <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
@@ -523,7 +643,7 @@ const blogPosts = [
         </div>
 
         <div className="prose prose-invert prose-lg max-w-none">
-          <p className="text-xl text-gray-300 leading-relaxed mb-8">
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
             The web development landscape has evolved dramatically over the past few years. Modern applications demand exceptional performance, SEO optimization, and seamless user experiences. Next.js has emerged as the framework of choice for building production-ready web applications that meet these requirements and scale effortlessly.
           </p>
           <p className="text-gray-300 leading-relaxed mb-8">
@@ -531,37 +651,37 @@ const blogPosts = [
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-blue-400">Why Next.js Dominates Modern Web Development</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Next.js combines the best of React with powerful server-side capabilities, creating a hybrid framework that delivers optimal performance through multiple rendering strategies. Unlike traditional single-page applications, Next.js offers server-side rendering (SSR), static site generation (SSG), and incremental static regeneration (ISR), giving developers the flexibility to choose the best approach for each page.
           </p>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             The framework's built-in optimizations—from automatic code splitting to image optimization—ensure your applications load quickly and perform smoothly. With Next.js 14 and beyond, features like React Server Components enable even more efficient rendering by moving component logic to the server when appropriate, reducing JavaScript bundle sizes and improving initial load times.
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-blue-400">Key Features That Set Next.js Apart</h2>
           
           <h3 className="text-2xl font-semibold mt-8 mb-4">Server-Side Rendering (SSR) & Static Generation</h3>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Next.js's hybrid rendering approach allows you to pre-render pages at build time or render them on-demand at request time. Static generation is perfect for content that doesn't change frequently, providing instant page loads and excellent SEO. Server-side rendering shines for dynamic content that needs to be fresh, such as user dashboards or personalized experiences.
           </p>
 
           <h3 className="text-2xl font-semibold mt-8 mb-4">App Router & React Server Components</h3>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             The new App Router in Next.js 13+ introduces a file-system-based routing system that simplifies navigation and layout composition. React Server Components take this further by allowing you to write components that run on the server, reducing client-side JavaScript and improving performance. This architecture enables streaming HTML, progressive enhancement, and better data fetching patterns.
           </p>
 
           <h3 className="text-2xl font-semibold mt-8 mb-4">Built-in API Routes</h3>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Next.js allows you to build API endpoints directly within your application using the API Routes feature. This eliminates the need for a separate backend server for simple operations, reducing complexity and deployment overhead. API routes are perfect for handling form submissions, authentication callbacks, webhook endpoints, and database operations.
           </p>
 
           <h3 className="text-2xl font-semibold mt-8 mb-4">Automatic Code Splitting & Optimization</h3>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Next.js automatically splits your code into smaller chunks, loading only what's needed for each page. The framework also optimizes images, fonts, and scripts out of the box, ensuring your application remains fast even as it grows. These optimizations are configured automatically, requiring minimal developer intervention.
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-blue-400">Best Practices for Next.js Development</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             To maximize the benefits of Next.js, follow these proven practices:
           </p>
           <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
@@ -574,10 +694,10 @@ const blogPosts = [
           </ul>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-blue-400">Scaling with Next.js</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Next.js applications scale exceptionally well, handling everything from small business websites to enterprise-level applications serving millions of users. The framework's ability to generate static pages at build time means you can serve thousands of pages with minimal server resources. For dynamic content, edge computing and serverless functions enable global distribution with low latency.
           </p>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             When deploying Next.js applications, platforms like Vercel (the creators of Next.js) provide seamless integration with zero-configuration deployments. However, Next.js applications can run on any Node.js server or be exported as static files for CDN hosting, giving you deployment flexibility.
           </p>
 
@@ -595,10 +715,10 @@ const blogPosts = [
           </div>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-blue-400">The Future of Web Development</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             As web technologies continue to evolve, Next.js remains at the forefront by incorporating the latest React features and web standards. The framework's commitment to performance, developer experience, and production readiness makes it an excellent investment for any web development project.
           </p>
-          <p className="text-gray-300 leading-relaxed">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed">
             Whether you're building a marketing website, a complex web application, or an e-commerce platform, Next.js provides the tools and capabilities needed to create exceptional digital experiences. The combination of developer-friendly features and enterprise-grade performance makes it the framework of choice for modern web development in 2026 and beyond.
           </p>
         </div>
@@ -654,7 +774,7 @@ const blogPosts = [
         </div>
 
         <div className="prose prose-invert prose-lg max-w-none">
-          <p className="text-xl text-gray-300 leading-relaxed mb-8">
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
             The mobile app development landscape in 2026 is dominated by cross-platform frameworks that allow businesses to reach iOS and Android users with a single codebase. Two frameworks stand out: Flutter and React Native. Both offer compelling advantages, but choosing the right one depends on your project requirements, team expertise, and long-term goals.
           </p>
           <p className="text-gray-300 leading-relaxed mb-8">
@@ -662,15 +782,15 @@ const blogPosts = [
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Understanding Cross-Platform Development</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Cross-platform development emerged as a solution to the challenge of maintaining separate codebases for iOS and Android. Traditional native development requires different programming languages (Swift/Kotlin), development tools, and teams, significantly increasing costs and time-to-market. Cross-platform frameworks bridge this gap by allowing developers to write code once and deploy it to multiple platforms.
           </p>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             The trade-off involves performance considerations, access to platform-specific features, and development ecosystem maturity. However, modern cross-platform frameworks like Flutter and React Native have narrowed these gaps substantially, making them viable options for most mobile applications.
           </p>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Flutter: Google's UI Toolkit</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Flutter uses Dart programming language and compiles to native code, providing near-native performance. It uses its own rendering engine to draw widgets directly on the canvas, resulting in consistent UI across platforms and excellent performance.
           </p>
 
@@ -692,7 +812,7 @@ const blogPosts = [
           </ul>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">React Native: Facebook's Framework</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             React Native uses JavaScript (or TypeScript) and leverages native components, providing a bridge between JavaScript code and native UI elements. This approach allows developers to use React's declarative programming model while accessing native functionality.
           </p>
 
@@ -714,7 +834,7 @@ const blogPosts = [
           </ul>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">When to Choose Flutter</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Choose Flutter when:
           </p>
           <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
@@ -726,7 +846,7 @@ const blogPosts = [
           </ul>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">When to Choose React Native</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Choose React Native when:
           </p>
           <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
@@ -738,7 +858,7 @@ const blogPosts = [
           </ul>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">Making the Right Choice for Your Project</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Both Flutter and React Native are excellent choices for cross-platform mobile development. The decision should be based on:
           </p>
           <ul className="text-gray-300 leading-relaxed mb-6 list-disc list-inside space-y-2">
@@ -762,10 +882,10 @@ const blogPosts = [
           </div>
 
           <h2 className="text-3xl font-bold mt-12 mb-6 text-purple-400">The Future of Cross-Platform Development</h2>
-          <p className="text-gray-300 leading-relaxed mb-6">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
             Both Flutter and React Native continue to evolve rapidly. Flutter is expanding its web and desktop capabilities, while React Native is improving performance with new architecture and better native module integration. The gap between native and cross-platform development continues to narrow, making these frameworks increasingly viable for enterprise applications.
           </p>
-          <p className="text-gray-300 leading-relaxed">
+          <p className="text-base md:text-lg text-gray-300 leading-relaxed">
             Regardless of which framework you choose, the key to successful mobile app development lies in understanding your users, designing exceptional experiences, and building maintainable, scalable applications. Both Flutter and React Native provide the tools to achieve these goals, and the right choice depends on your specific project context and requirements.
           </p>
         </div>

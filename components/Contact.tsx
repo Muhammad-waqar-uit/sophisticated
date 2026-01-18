@@ -83,7 +83,7 @@ export default function Contact() {
 					<h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
 						Get In Touch
 					</h2>
-					<p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+					<p className="text-base md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
 						Ready to start your next project? Let's discuss how we can help bring your vision to life.
 					</p>
 				</motion.div>
@@ -96,7 +96,7 @@ export default function Contact() {
 						transition={{ duration: 0.8 }}
 						viewport={{ once: true }}
 					>
-						<h3 className="text-2xl font-bold text-white mb-8">Let's Start a Conversation</h3>
+						<h3 className="text-xl md:text-2xl font-bold text-white mb-8">Let's Start a Conversation</h3>
 						<div className="space-y-6 mb-8">
 							{contactInfo.map((info, index) => (
 								<motion.div
@@ -120,7 +120,7 @@ export default function Contact() {
 												info.details
 											)}
 											</p>
-										<p className="text-gray-400 text-sm">{info.description}</p>
+										<p className="text-gray-400 text-sm md:text-base">{info.description}</p>
 									</div>
 								</motion.div>
 							))}
@@ -134,7 +134,7 @@ export default function Contact() {
 							viewport={{ once: true }}
 						>
 							<h4 className="text-white font-semibold mb-3">Why Choose XTen?</h4>
-							<ul className="space-y-2 text-gray-300 text-sm">
+							<ul className="space-y-2 text-gray-300 text-sm md:text-base">
 								<li className="flex items-center space-x-2">
 									<CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
 									<span>5+ years of industry experience</span>

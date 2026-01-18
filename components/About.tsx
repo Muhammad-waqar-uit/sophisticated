@@ -53,7 +53,7 @@ export default function About() {
           <span className="text-xl font-bold text-white -left-6 relative">TEN</span> */}
         </div>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             We are a passionate team of innovators, designers, and developers dedicated to creating software solutions
             that make a difference in the world.
           </p>
@@ -98,16 +98,16 @@ export default function About() {
           viewport={{ once: true }}
         >
           <div>
-            <h3 className="text-3xl font-bold text-white mb-6">Our Story</h3>
-            <p className="text-gray-300 mb-6 leading-relaxed">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">Our Story</h3>
+            <p className="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
               Founded in 2020, XTEN began as a small startup with a big vision: to democratize technology and make
               powerful software solutions accessible to businesses of all sizes.
             </p>
-            <p className="text-gray-300 mb-6 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-300 mb-6 leading-relaxed">
               Over the years, we've grown from a team of 3 to a diverse group of 50+ professionals, but our core mission
               remains the same - creating innovative solutions that drive real results.
             </p>
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed">
               Today, we're proud to serve clients across 10+ countries, helping them navigate the digital landscape and
               achieve their business goals through cutting-edge technology.
             </p>

@@ -172,8 +172,8 @@ export default function Services() {
                   <div className="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-blue-500/30 transition-colors duration-300">
                     <service.icon className="w-8 h-8 text-blue-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-3">{service.title}</h3>
-                  <p className="text-gray-300 leading-relaxed">{service.description}</p>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">{service.title}</h3>
+                  <p className="text-base md:text-lg text-gray-300 leading-relaxed">{service.description}</p>
                 </div>
                 <div className="space-y-2">
                   {service.features.map((feature, i) => (
@@ -181,7 +181,7 @@ export default function Services() {
                       key={feature}
                       custom={i}
                       variants={featureVariants}
-                      className="flex items-center space-x-2 text-sm text-gray-400"
+                      className="flex items-center space-x-2 text-sm md:text-base text-gray-400"
                     >
                       <div className="w-1.5 h-1.5 bg-blue-400 rounded-full" />
                       <span>{feature}</span>
@@ -201,8 +201,8 @@ export default function Services() {
           viewport={{ once: true }}
         >
           <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-8 backdrop-blur-sm border border-white/10">
-            <h3 className="text-3xl font-bold text-white mb-4">Ready to Get Started?</h3>
-            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Ready to Get Started?</h3>
+            <p className="text-base md:text-lg text-gray-300 mb-6 max-w-2xl mx-auto leading-relaxed">
               Let's discuss your project and see how we can help bring your vision to life with our expertise.
             </p>
             <motion.button
