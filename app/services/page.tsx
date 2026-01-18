@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import Services from "@/components/Services"
 import dynamic from "next/dynamic"
+import { SmoothCursor } from "@/components/ui/smooth-cursor"
 
 // Lazy load Starfield component to improve initial page load
 const Starfield = dynamic(() => import("@/components/Starfield"), {
@@ -13,6 +14,7 @@ const Starfield = dynamic(() => import("@/components/Starfield"), {
 export default function ServicesPage() {
   return (
     <main className="pt-[80px] min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+      <SmoothCursor/>
       <Starfield/>
       <div className="container mx-auto px-6 py-24">
         <motion.div

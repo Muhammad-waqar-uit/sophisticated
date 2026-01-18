@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 // Lazy load Starfield component to improve initial page load
 const Starfield = dynamic(() => import("@/components/Starfield"), {
@@ -774,6 +775,7 @@ const blogPosts = [
 
   return (
     <div>
+      <SmoothCursor/>
       {currentPage === 'home' && <BlogHome />}
       {currentPage === 'ai-chatbots' && <AIChatbotsPost />}
       {currentPage === 'blockchain-future' && <BlockchainPost />}
