@@ -264,10 +264,10 @@ const blogPosts = [
           <Link 
             href="/blogs"
             onClick={() => setCurrentPage('home')}
-            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
+            className="flex items-center gap-2 group mb-6"
           >
-            <ArrowLeft className="w-5 h-5" />
-            Back to Blog
+            <ArrowLeft className="w-5 h-5 text-cyan-400 group-hover:text-purple-400 transition-all duration-300" />
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:from-cyan-300 group-hover:via-blue-300 group-hover:to-purple-300 transition-all duration-300 font-semibold">Back to Blog</span>
           </Link>
           <span className="px-4 py-2 bg-cyan-500/10 text-cyan-400 rounded-full text-sm font-medium inline-block mb-6">
             AI & Automation
@@ -298,7 +298,7 @@ const blogPosts = [
             fill
             sizes="(max-width: 768px) 100vw, 896px"
             loading="lazy"
-            className="object-contain"
+            className="object-cover"
           />
         </div>
 
@@ -347,7 +347,7 @@ const blogPosts = [
             </p>
             <Link 
               href="/#contact"
-              className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-6 py-3 rounded-lg font-semibold transition-all"
+              className="inline-block bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-cyan-500/50"
             >
               Get Started Today
             </Link>
@@ -375,10 +375,10 @@ const blogPosts = [
           <Link 
             href="/blogs"
             onClick={() => setCurrentPage('home')}
-            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
+            className="flex items-center gap-2 group mb-6"
           >
-            <ArrowLeft className="w-5 h-5" />
-            Back to Blog
+            <ArrowLeft className="w-5 h-5 text-cyan-400 group-hover:text-purple-400 transition-all duration-300" />
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:from-cyan-300 group-hover:via-blue-300 group-hover:to-purple-300 transition-all duration-300 font-semibold">Back to Blog</span>
           </Link>
           <span className="px-4 py-2 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium inline-block mb-6">
             Blockchain Development
@@ -404,12 +404,12 @@ const blogPosts = [
                     
         <div className="h-96 relative rounded-2xl mb-12 overflow-hidden">
           <Image
-            src="/BTWO-1.png"
+            src="/BIONE-1.png"
             alt="The Future of Blockchain"
             fill
             sizes="(max-width: 768px) 100vw, 896px"
             loading="lazy"
-            className="object-contain"
+            className="object-cover"
                     />
                   </div>
 
@@ -463,7 +463,7 @@ const blogPosts = [
             </p>
             <Link 
               href="/#contact"
-              className="inline-block bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-400 hover:to-blue-500 px-6 py-3 rounded-lg font-semibold transition-all"
+              className="inline-block bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-600 hover:from-purple-400 hover:via-blue-400 hover:to-cyan-500 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-purple-500/50"
             >
               Discuss Your Project
             </Link>
@@ -498,10 +498,10 @@ const blogPosts = [
           <Link 
             href="/blogs"
             onClick={() => setCurrentPage('home')}
-            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
+            className="flex items-center gap-2 group mb-6"
           >
-            <ArrowLeft className="w-5 h-5" />
-            Back to Blog
+            <ArrowLeft className="w-5 h-5 text-cyan-400 group-hover:text-purple-400 transition-all duration-300" />
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:from-cyan-300 group-hover:via-blue-300 group-hover:to-purple-300 transition-all duration-300 font-semibold">Back to Blog</span>
           </Link>
           <span className="px-4 py-2 bg-cyan-500/10 text-cyan-400 rounded-full text-sm font-medium inline-block mb-6">
             AI & Automation
@@ -532,7 +532,7 @@ const blogPosts = [
             fill
             sizes="(max-width: 768px) 100vw, 896px"
             loading="lazy"
-            className="object-contain"
+            className="object-cover"
           />
         </div>
 
@@ -585,7 +585,7 @@ const blogPosts = [
             </p>
             <Link 
               href="/#contact"
-              className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 px-6 py-3 rounded-lg font-semibold transition-all"
+              className="inline-block bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-cyan-500/50"
             >
               Get Started Today
             </Link>
@@ -604,10 +604,10 @@ const blogPosts = [
           <Link 
             href="/blogs"
             onClick={() => setCurrentPage('home')}
-            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
+            className="flex items-center gap-2 group mb-6"
           >
-            <ArrowLeft className="w-5 h-5" />
-            Back to Blog
+            <ArrowLeft className="w-5 h-5 text-cyan-400 group-hover:text-purple-400 transition-all duration-300" />
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:from-cyan-300 group-hover:via-blue-300 group-hover:to-purple-300 transition-all duration-300 font-semibold">Back to Blog</span>
           </Link>
           <span className="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium inline-block mb-6">
             Web Development
@@ -633,12 +633,12 @@ const blogPosts = [
 
         <div className="h-96 relative rounded-2xl mb-12 overflow-hidden">
           <Image
-            src="/PI-1.png"
+            src="/PII-1.png"
             alt="Modern Web Development with Next.js"
             fill
             sizes="(max-width: 768px) 100vw, 896px"
             loading="lazy"
-            className="object-contain"
+            className="object-cover"
           />
         </div>
 
@@ -708,7 +708,7 @@ const blogPosts = [
             </p>
             <Link 
               href="/#contact"
-              className="inline-block bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-400 hover:to-cyan-500 px-6 py-3 rounded-lg font-semibold transition-all"
+              className="inline-block bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-600 hover:from-blue-400 hover:via-cyan-400 hover:to-purple-500 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-blue-500/50"
             >
               Start Your Project
             </Link>
@@ -735,10 +735,10 @@ const blogPosts = [
           <Link 
             href="/blogs"
             onClick={() => setCurrentPage('home')}
-            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
+            className="flex items-center gap-2 group mb-6"
           >
-            <ArrowLeft className="w-5 h-5" />
-            Back to Blog
+            <ArrowLeft className="w-5 h-5 text-cyan-400 group-hover:text-purple-400 transition-all duration-300" />
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:from-cyan-300 group-hover:via-blue-300 group-hover:to-purple-300 transition-all duration-300 font-semibold">Back to Blog</span>
           </Link>
           <span className="px-4 py-2 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium inline-block mb-6">
             Mobile Development
@@ -769,7 +769,7 @@ const blogPosts = [
             fill
             sizes="(max-width: 768px) 100vw, 896px"
             loading="lazy"
-            className="object-contain"
+            className="object-cover"
           />
         </div>
 
@@ -875,7 +875,7 @@ const blogPosts = [
             </p>
             <Link 
               href="/#contact"
-              className="inline-block bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-400 hover:to-blue-500 px-6 py-3 rounded-lg font-semibold transition-all"
+              className="inline-block bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-600 hover:from-purple-400 hover:via-blue-400 hover:to-cyan-500 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-purple-500/50"
             >
               Discuss Your Mobile App Project
             </Link>

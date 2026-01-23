@@ -109,7 +109,7 @@ export default function CareersPage() {
       <Starfield/>
       
       {/* Hero Section */}
-      <section className="relative z-10 container mx-auto px-6 py-20 md:py-32">
+      <section className="relative z-10 container mx-auto px-6 pt-20 md:pt-32 pb-10 md:pb-14">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -153,7 +153,7 @@ export default function CareersPage() {
                 </p>
                 <motion.button
                   onClick={scrollToContact}
-                  className="group inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+                    className="group inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-cyan-500/50"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -173,12 +173,12 @@ export default function CareersPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">
             Why Work With Us
           </h2>
-              <p className="text-base md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed whitespace-nowrap">
                 We're building something special, and we'd love to have you be a part of it
               </p>
         </motion.div>
@@ -264,7 +264,7 @@ export default function CareersPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
                 onClick={scrollToContact}
-                className="group inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
+                  className="group inline-flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-cyan-500/50"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -273,7 +273,7 @@ export default function CareersPage() {
               </motion.button>
               <Link href="/services">
                 <motion.button
-                  className="group inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm hover:bg-white/5 w-full sm:w-auto"
+                  className="group inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-600 hover:from-purple-400 hover:via-blue-400 hover:to-cyan-500 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-purple-500/50 w-full sm:w-auto"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
